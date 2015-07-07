@@ -5,7 +5,7 @@ ruby '2.1.6'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails',                   '4.2.1'
 # WYSIWYG Editor
-gem 'ckeditor',                '>=4.1.2'
+gem 'ckeditor'                 ,github: 'galetahub/ckeditor'       # '>=4.1.2'
 # Provides file upload functionality.
 gem 'paperclip',               '>=4.3.0'
 # Provides resource oriented interfaces and API clients for AWS services.
