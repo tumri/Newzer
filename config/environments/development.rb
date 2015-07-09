@@ -43,4 +43,14 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Paperclip upload settings.
+  config.paperclip_defaults = {
+    :storage => :s3,
+    :bucket => ENV['AWS_S3_BUCKET_NAME'],
+    :s3_credentials => {
+      :access_key_id => ENV['AWS_ACCESS_KEY_ID'],
+      :secret_access_key => ENV['AWS_SECRET_ACCESS_KEY']
+    }
+  }
 end

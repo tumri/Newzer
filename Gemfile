@@ -6,10 +6,14 @@ ruby '2.1.6'
 gem 'rails',                   '4.2.1'
 # WYSIWYG Editor
 gem 'ckeditor',                '>=4.1.2'
-# Provides file upload functionality.
+# Provides file upload capability.
 gem 'paperclip',               '>=4.3.0'
-# Provides resource oriented interfaces and API clients for AWS services.
-gem 'aws-sdk',                 '>=2.1.2'
+# gem 'carrierwave',             '>=0.10.0'
+# Provides cloud storage functionality.
+gem 'aws-sdk',                 '>=2.1.3'
+# gem 'fog',                     '>=1.32.0'
+# ImageMagick integration.
+# gem 'mini_magick',             '>=4.2.7'
 # Password Protection
 gem 'bcrypt',                  '~>3.1.10'
 # Faker generates fake data.
@@ -29,7 +33,7 @@ gem 'coffee-rails',            '~> 4.1.0'
 # Use jquery as the JavaScript library
 gem 'jquery-rails',            '>= 4.0.3'
 # Turbolinks makes following links in your web application faster.
-gem 'turbolinks',              '>=2.5.3'
+# gem 'turbolinks',              '>=2.5.3'   # CURRENTLY BREAKS CKEDITOR!
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder',                '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.

@@ -13,7 +13,6 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap
-//  require turbolinks
+//  require turbolinks // CURRENTLY BREAKS CKEDITOR
 //= require ckeditor/init
 //= require_tree .
-
