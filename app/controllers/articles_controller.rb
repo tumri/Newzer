@@ -39,9 +39,11 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
-    @article.destroy
-    flash[:danger] = 'Article deleted.'
-    redirect_to request.referrer || articles_path
+    @article = Article.find(params[:id])
+    if @article.destroy
+      flash[:danger] = 'Article deleted.'
+      redirect_to request.referrer || articles_path
+    end
   end
 
   private

@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
   has_many      :articles,              dependent: :destroy
 
+  has_many      :pictures
+
   attr_accessor :remember_token,
                 :activation_token,
                 :reset_token
