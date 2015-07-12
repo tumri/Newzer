@@ -20,4 +20,4 @@
 /spring/*.pid
 
 # Ignore Development Uploads
-public/uploads/*
+/public/uploads/*
