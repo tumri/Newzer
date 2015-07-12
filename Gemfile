@@ -6,11 +6,11 @@ ruby '2.1.6'
 gem 'rails',                   '4.2.1'
 # WYSIWYG Editor
 gem 'ckeditor',                '>=4.1.2'
+# Provides authorization functionality.
+gem 'pundit',                  '>=1.0.1'
 # Provides file upload capability.
-# gem 'paperclip',               '>=4.3.0'
 gem 'carrierwave',             '>=0.10.0'
 # Provides cloud storage functionality.
-# gem 'aws-sdk',                 '>=2.1.3'
 gem 'fog',                     '>=1.32.0'
 # ImageMagick integration.
 gem 'mini_magick',             '>=4.2.7'
