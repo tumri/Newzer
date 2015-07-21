@@ -1,9 +1,13 @@
 class ArticlesController < ApplicationController
-  #before_action :logged_in_user, only: [:create, :destroy]
-  #before_action :correct_user,   only: :destroy :edit
+  before_action :logged_in_user, only: [:create, :update, :destroy]
+  before_action :admin_user,     only: :approve
 
   def index
     @articles = Article.order('created_at DESC')
+  end
+
+  def approved
+    @articles = Article.where(approved: true)
   end
 
   def show
@@ -46,14 +50,32 @@ class ArticlesController < ApplicationController
     end
   end
 
+  def approve
+    @article = Article.find(params[:id])
+    if @article.toggle!(:approved)
+      flash[:success] = 'Article approved.'
+      redirect_to request.referrer || articles_path
+    else
+      flash[:danger] = 'Invalid approval.'
+      redirect_to request.referrer || articles_path
+    end
+  end
+
   private
 
     def article_params
-      params.require(:article).permit(:title, :body)
+      params.require(:article).permit(:title, :body, :category_id)
     end
 
-    def correct_user
-      @article = current_user.articles.find_by(id: params[:id])
-      redirect_to articles_path if @article.nil?
+    def logged_in_user
+      unless logged_in?
+        store_location
+        flash[:danger] = 'Please log in.'
+        redirect_to login_url
+      end
+    end
+
+    def admin_user
+      redirect_to(root_url) unless current_user.admin?
     end
 end

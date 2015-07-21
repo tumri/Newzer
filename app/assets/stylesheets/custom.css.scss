@@ -48,6 +48,16 @@ $gray-medium-light: #eaeaea;
   box-sizing:         border-box;
 }
 
+/* miscellaneous */
+
+.debug_dump {
+  clear: both;
+  float: left;
+  width: 100%;
+  margin-top: 45px;
+  @include box_sizing;
+}
+
 /* universal */
 
 pre {
@@ -227,15 +237,6 @@ aside {
   margin-top: 15px;
 }
 
-/* miscellaneous */
-
-.debug_dump {
-  clear: both;
-  float: left;
-  width: 100%;
-  margin-top: 45px;
-  @include box_sizing;
-}
 
 /* users index */
 
@@ -251,7 +252,16 @@ aside {
 
 /* articles */
 
+.article-title{
+  padding: 10px 0px 10px 0px;
+}
+
 .article-edit-header{
   padding: 10px 20px;
-  border: 1px solid $gray-lighter
+  border: 1px solid $gray-lighter;
+}
+
+.article-buttons{
+  display: inline-block;
+  float: right;
 }

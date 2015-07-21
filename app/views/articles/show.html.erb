@@ -1,0 +1,46 @@
+<h3 class='bs-callout-default'><%= @article.title.html_safe %></h3>
+<p><%= @article.body.html_safe %></p>
+
+<div>
+<%= link_to gravatar_for(@article.user, size: 50), @article.user %>
+<span class='user'>
+  <%= link_to @article.user.name, @article.user %>
+</span>
+</div>
+
+<% if current_user.admin? || current_user?(@article.user) %>
+
+  <div class='article-buttons'>
+
+    <% if @article.approved? %>
+      <span class='glyphicon glyphicon-ok btn-sm'></span>
+    <% end %>
+
+    <% if current_user.admin?%>
+      <%= link_to 'Approve',
+                  @article,
+                  method: :approve,
+                  data: { confirm: 'Confirm approval?'},
+                  class: 'btn btn-sm btn-default' %>
+    <% end %>
+
+    <%= link_to 'Edit Article', edit_article_path(@article),
+    class: 'btn btn-sm btn-default' %>
+
+    <%= link_to 'Delete',
+                 @article,
+                 method: :delete,
+                 data: { confirm: 'You sure?' },
+                 class: 'btn btn-sm btn-default'%>
+  </div>
+
+<% end %>
+
+<div>
+<span class='category'>
+  <%= @article.category.name %>
+</span>
+</div>
+
+
+

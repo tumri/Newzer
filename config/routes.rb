@@ -27,9 +27,9 @@ Rails.application.routes.draw do
 
   get       'articles'                 => 'articles#index'
 
-  resources :users
+  post      '/articles/:id'            => 'articles#approve'
 
-  resources :user_details
+  resources :users
 
   resources :account_activations, only: [:edit]
 

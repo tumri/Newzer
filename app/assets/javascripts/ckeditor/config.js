@@ -9,6 +9,7 @@ CKEDITOR.editorConfig = function( config )
   // config.language = 'fr';
   // config.uiColor = '#AADC6E';
   config.skin = 'moonocolor';
+  config.height = 500;
 
   /* Filebrowser routes */
   // The location of an external file browser, that should be launched when "Browse Server" button is pressed.
@@ -102,7 +103,7 @@ CKEDITOR.editorConfig = function( config )
     { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
     { name: 'insert', items: [ 'Image', 'Flash', 'Table', 'HorizontalRule', 'SpecialChar' ] },
     { name: 'paragraph', groups: [ 'list', 'indent', 'blocks', 'align', 'bidi' ], items: [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] },
-    '/',
+    // '/',
     { name: 'styles', items: [ 'Styles', 'Format', 'Font', 'FontSize' ] },
     { name: 'colors', items: [ 'TextColor', 'BGColor' ] },
     { name: 'basicstyles', groups: [ 'basicstyles', 'cleanup' ], items: [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ] }

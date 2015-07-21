@@ -13,6 +13,16 @@
     <%= f.text_field :title %>
   </div>
   <div>
+    <%= f.label :category %>
+  </div>
+  <div>
+    <%= f.collection_select  :category_id,
+                             Category.all,
+                             :id,
+                             :name,
+                             include_blank: false %>
+  </div>
+  <div>
     <%= f.label :body %>
   </div>
   <div>

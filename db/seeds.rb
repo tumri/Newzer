@@ -32,3 +32,18 @@ User.create!(name:                    'Tester',
                activated:                 true,
                activated_at:     Time.zone.now)
 end
+
+
+Category.create!(name:                 'World')
+Category.create!(name:                    'US')
+Category.create!(name:             'Economics')
+Category.create!(name:               'Finance')
+Category.create!(name:            'Technology')
+Category.create!(name:                'Health')
+Category.create!(name:             'Lifestyle')
+Category.create!(name:         'Entertainment')
+Category.create!(name:                'Movies')
+Category.create!(name:                'Gaming')
+Category.create!(name:                'Sports')
+Category.create!(name:                 'Other')
+
