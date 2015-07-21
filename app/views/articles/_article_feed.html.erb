@@ -1,17 +1,38 @@
 <% @articles.each do |article| %>
+
   <div class='panel panel-default'>
+
     <div class='panel-heading'>
-      <h3 class='panel-title'><%= link_to article.title.html_safe, article %></h3>
+
+      <h3 class='panel-title'>
+
+      <%= link_to article.title.html_safe, article %>
+
+      <div class='article-tag label label-info'>
+        <%= article.category.name %>
+      </div>
+
+      </h3>
+
     </div>
+
     <div class='panel-body'>
+
       <p><%= article.body.html_safe %></p>
 
       <div>
-      <%= link_to gravatar_for(article.user, size: 50), article.user %>
-      <span class='user'>
-        <%= link_to article.user.name, article.user %>
-      </span>
+        <%= link_to gravatar_for(article.user, size: 50), article.user %>
+
+        <span class='user'>
+          <%= link_to article.user.name, article.user %>
+        </span>
+
       </div>
+
+      <span class='article-time'>
+        <li>Created: <%= article.created_at %></li>
+        <li>Updated: <%= article.updated_at %></li>
+      </span>
 
       <% if current_user.admin? || current_user?(article.user) %>
 
@@ -21,34 +42,35 @@
           <% end %>
 
           <% if current_user.admin? %>
-            <%= link_to 'Approve',
+            <% if article.approved? %>
+              <%= link_to 'Revoke Approval',
                         article,
                         method: :approve,
                         data: { confirm: 'Confirm approval?'},
-                        class: 'btn btn-sm btn-default' %>
+                        class: 'btn btn-sm btn-danger' %>
+              <% else %>
+              <%= link_to 'Approve',
+                          article,
+                          method: :approve,
+                          data: { confirm: 'Confirm approval?'},
+                          class: 'btn btn-sm btn-success' %>
+              <% end %>
           <% end %>
 
           <%= link_to 'Edit Article', edit_article_path(article),
-          class: 'btn btn-sm btn-default' %>
+          class: 'btn btn-sm btn-warning' %>
 
           <%= link_to 'Delete',
                        article,
                        method: :delete,
                        data: { confirm: 'You sure?' },
-                       class: 'btn btn-sm btn-default'%>
+                       class: 'btn btn-sm btn-danger'%>
         </div>
 
       <% end %>
 
-      <div>
-      <span class='category'>
-        <%= article.category.name %>
-      </span>
-      </div>
     </div>
 
-    <% if article != @articles.last %>
-    <hr />
-    <% end %>
   </div>
+
 <% end %>

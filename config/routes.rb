@@ -27,6 +27,8 @@ Rails.application.routes.draw do
 
   get       'articles'                 => 'articles#index'
 
+  get       'approved'                 => 'articles#approved'
+
   post      '/articles/:id'            => 'articles#approve'
 
   resources :users

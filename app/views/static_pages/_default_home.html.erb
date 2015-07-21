@@ -1,0 +1,13 @@
+<div class='center jumbotron'>
+
+  <h1><%= yield(:page) %></h1>
+  <p>
+   Welcome to Newzer!
+  </p>
+
+  <%= link_to 'Register', signup_path, class: 'btn btn-lg btn-primary' %>
+
+</div>
+
+<div align='center'><%= link_to image_tag('ruby-on-rails-logo.png', alt: 'Rails logo'), 'http://rubyonrails.org/' %></div>
+<div align='center'><%= link_to image_tag('ckeditor-logo.png', alt: 'CKEditor logo'), 'http://ckeditor.com/' %></div>
