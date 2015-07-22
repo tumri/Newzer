@@ -3,8 +3,6 @@ class Article < ActiveRecord::Base
 
   belongs_to    :category
 
-  #attr_accessor :article, :category_id
-
   default_scope -> { order(created_at: :desc) }
 
   validates     :user_id,      presence: true
