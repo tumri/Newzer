@@ -1,6 +1,12 @@
 @import 'bootstrap-sprockets';
 @import 'bootstrap';
 
+/* admin color */
+
+.admin-user{
+  color: #d9534f;
+}
+
 
 /* Base 16 Colors */
 
@@ -294,6 +300,10 @@ aside {
 }
 
 /* articles */
+
+.new-article-button{
+  margin-top: 13px;
+}
 
 .article-edit-header{
   padding: 10px 20px;

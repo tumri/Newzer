@@ -24,7 +24,11 @@
         <%= link_to gravatar_for(article.user, size: 50), article.user %>
 
         <span class='user'>
+        <% if article.user.admin? %>
+          <%= link_to article.user.name, article.user, class: 'admin-user' %>
+        <% else %>
           <%= link_to article.user.name, article.user %>
+        <% end %>
         </span>
 
       </div>
@@ -46,7 +50,7 @@
               <%= link_to 'Revoke Approval',
                         article,
                         method: :approve,
-                        data: { confirm: 'Confirm approval?'},
+                        data: { confirm: 'Confirm revoke approval?'},
                         class: 'btn btn-sm btn-danger' %>
               <% else %>
               <%= link_to 'Approve',
@@ -63,7 +67,7 @@
           <%= link_to 'Delete',
                        article,
                        method: :delete,
-                       data: { confirm: 'You sure?' },
+                       data: { confirm: 'Are you sure?' },
                        class: 'btn btn-sm btn-danger'%>
         </div>
 

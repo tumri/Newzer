@@ -52,11 +52,12 @@ class ArticlesController < ApplicationController
 
   def approve
     @article = Article.find(params[:id])
-    if @article.toggle!(:approved)
+    @article.toggle!(:approved)
+    if @article.approved?
       flash[:success] = 'Article approved.'
       redirect_to request.referrer || articles_path
     else
-      flash[:danger] = 'Invalid approval.'
+      flash[:danger] = 'Article approval revoked.'
       redirect_to request.referrer || articles_path
     end
   end
