@@ -3,7 +3,7 @@ class Article < ActiveRecord::Base
 
   belongs_to    :category
 
-  attr_accessor :category_id
+  #attr_accessor :article, :category_id
 
   default_scope -> { order(created_at: :desc) }
 
