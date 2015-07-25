@@ -57,7 +57,19 @@ class ArticlesController < ApplicationController
       flash[:success] = 'Article approved.'
       redirect_to request.referrer || articles_path
     else
-      flash[:danger] = 'Article approval revoked.'
+      flash[:danger] = 'Article unapproved.'
+      redirect_to request.referrer || articles_path
+    end
+  end
+
+  def frontpage
+    @article = Article.find(params[:id])
+    @article.toggle!(:frontpage)
+    if @article.frontpage?
+      flash[:success] = 'Article added to the Front Page.'
+      redirect_to request.referrer || articles_path
+    else
+      flash[:danger] = 'Article removed from the Front Page.'
       redirect_to request.referrer || articles_path
     end
   end

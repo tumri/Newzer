@@ -1,0 +1,13 @@
+<div><h2>Categories</h2></div>
+
+<div class='container'>
+  <% @categories.each do |category| %>
+
+  <div class='category-div col-md-4'>
+    <%= link_to category.name,
+                category,
+                class: 'category-button-placeholder btn btn-block btn-default' %>
+  </div>
+
+  <% end %>
+</div>

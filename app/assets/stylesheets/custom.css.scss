@@ -327,3 +327,76 @@ aside {
 .article-time li{
   list-style: none;
 }
+
+/* categories */
+
+.category-div{
+  margin-bottom: 1%;
+}
+
+@mixin category-button{
+  font-size: 2em;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 900;
+  padding-top: 20%;
+  padding-bottom: 20%;
+  background-position: center;
+  background-size: cover;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+}
+
+.category-button-placeholder{
+  @include category_button;
+  background-image: url('image-placeholder.jpeg');
+}
+.category-button-world{
+  @include category_button;
+  background-image: url('image-placeholder.jpeg');
+}
+
+.category-button-us{
+  @include category_button;
+  background-image: url('image-placeholder.jpeg');
+}
+.category-button-economics{
+  @include category_button;
+  background-image: url('image-placeholder.jpeg');
+}
+.category-button-finance{
+  @include category_button;
+  background-image: url('image-placeholder.jpeg');
+}
+.category-button-technology{
+  @include category_button;
+  background-image: url('image-placeholder.jpeg');
+}
+.category-button-health{
+  @include category_button;
+  background-image: url('image-placeholder.jpeg');
+}
+.category-button-lifestyle{
+  @include category_button;
+  background-image: url('image-placeholder.jpeg');
+}
+.category-button-entertainment{
+  @include category_button;
+  background-image: url('image-placeholder.jpeg');
+}
+.category-button-movies{
+  @include category_button;
+  background-image: url('image-placeholder.jpeg');
+}
+.category-button-gaming{
+  @include category_button;
+  background-image: url('image-placeholder.jpeg');
+}
+.category-button-sports{
+  @include category_button;
+  background-image: url('image-placeholder.jpeg');
+}
+.category-button-other{
+  @include category_button;
+  background-image: url('image-placeholder.jpeg');
+}
+

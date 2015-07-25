@@ -31,6 +31,10 @@ Rails.application.routes.draw do
 
   post      '/articles/:id'            => 'articles#approve'
 
+  get       'categories'               => 'categories#index'
+
+  get       'categories/world'         => 'categories#world'
+
   resources :users
 
   resources :account_activations, only: [:edit]
@@ -38,4 +42,6 @@ Rails.application.routes.draw do
   resources :password_resets,     only: [:new, :create, :edit, :update]
 
   resources :articles
+
+  resources :categories
 end

@@ -3,6 +3,7 @@
     <%= link_to 'Newzer', root_path, id: 'logo' %>
     <nav>
       <ul class='nav navbar-nav navbar-right'>
+        <li><%= link_to 'Categories', categories_path %></li>
         <li><%= link_to 'Featured', approved_path %></li>
         <% if logged_in? %>
           <li><%= link_to 'Articles', articles_path %></li>
