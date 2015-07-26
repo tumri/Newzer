@@ -4,11 +4,9 @@
   <% @categories.each do |category| %>
 
   <div class='category-div col-md-4'>
-    <span class='category-button-<%= category.id %> btn btn-block btn-default'>
     <%= link_to category.name,
                 category,
-                class: 'category-button' %>
-    </span>
+                class: "category-button-#{category.id} btn btn-block btn-default" %>
   </div>
 
   <% end %>
