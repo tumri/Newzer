@@ -17,6 +17,10 @@ The login/logout/validation system is reused from RailsTutorial but could be rep
 
 User/author avatars are handled through Gravatar but may be replaced with a private avatar system in the future.
 
+Each user/author has the ability to post fully formatted articles using CKEditor.
+
 Images/attachments from articles are stored in Amazon S3. File storage is handled by CarrierWave and Fog because Paperclip+AWS-SDK were buggy when used with CKEditor.
 
-Each user/author has the ability to post fully formatted articles and an admin/editor-in-chief is able to approve articles to be shown on the main page feed. Tags will be used to filter for relevant articles.
+An admin/editor-in-chief is able to approve articles to be shown on the featured article feed.
+
+Each article is tagged under a category. Users are able to go to a category page, select a category, and view articles from that category.
