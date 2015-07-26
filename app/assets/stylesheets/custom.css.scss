@@ -338,64 +338,71 @@ aside {
   font-size: 2em;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 900;
-  padding-top: 20%;
-  padding-bottom: 20%;
+  border: .2em solid white;
+  border-radius: .4em;
+  padding-top: 30%;
+  padding-bottom: 30%;
   background-position: center;
   background-size: cover;
   -webkit-background-size: cover;
   -moz-background-size: cover;
 }
 
+.category-button{
+  text-decoration: none;
+  color: black;
+}
+
 .category-button-placeholder{
   @include category_button;
   background-image: url('image-placeholder.jpeg');
 }
-.category-button-world{
+.category-button-1{
   @include category_button;
   background-image: url('image-placeholder.jpeg');
 }
 
-.category-button-us{
+.category-button-2{
   @include category_button;
   background-image: url('image-placeholder.jpeg');
 }
-.category-button-economics{
+.category-button-3{
   @include category_button;
   background-image: url('image-placeholder.jpeg');
 }
-.category-button-finance{
+.category-button-4{
   @include category_button;
   background-image: url('image-placeholder.jpeg');
 }
-.category-button-technology{
+.category-button-5{
   @include category_button;
   background-image: url('image-placeholder.jpeg');
 }
-.category-button-health{
+.category-button-6{
   @include category_button;
   background-image: url('image-placeholder.jpeg');
 }
-.category-button-lifestyle{
+.category-button-7{
   @include category_button;
   background-image: url('image-placeholder.jpeg');
 }
-.category-button-entertainment{
+.category-button-8{
   @include category_button;
   background-image: url('image-placeholder.jpeg');
 }
-.category-button-movies{
+.category-button-9{
   @include category_button;
   background-image: url('image-placeholder.jpeg');
 }
-.category-button-gaming{
+.category-button-10{
   @include category_button;
   background-image: url('image-placeholder.jpeg');
 }
-.category-button-sports{
+.category-button-11{
   @include category_button;
   background-image: url('image-placeholder.jpeg');
 }
-.category-button-other{
+.category-button-12{
   @include category_button;
   background-image: url('image-placeholder.jpeg');
 }
