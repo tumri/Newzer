@@ -27,13 +27,11 @@ Rails.application.routes.draw do
 
   get       'articles'                 => 'articles#index'
 
-  get       'approved'                 => 'articles#approved'
+  get       'featured'                 => 'articles#featured'
 
-  post      '/articles/:id'            => 'articles#approve'
+  post      '/articles/:id'            => 'articles#feature'
 
   get       'categories'               => 'categories#index'
-
-  get       'categories/world'         => 'categories#world'
 
   resources :users
 
@@ -41,7 +39,9 @@ Rails.application.routes.draw do
 
   resources :password_resets,     only: [:new, :create, :edit, :update]
 
-  resources :articles
+  resources :articles do
+    resources :comments
+  end
 
-  resources :categories
+  resources :categories,          only: [:index, :show]
 end

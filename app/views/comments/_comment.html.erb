@@ -1,0 +1,19 @@
+<div class='comment clearfix'>
+  <div class='comment content'>
+    <p class='comment_name'>
+      <strong>
+        <%= link_to "#{comment.user.try(:name)}",
+                    comment.user %>
+      </strong>
+    </p>
+    <p class='comment_body'><%= comment.body %></p>
+    <p class='comment_time'><%= comment.created_at %></p>
+  </div>
+  <div>
+    <%= link_to ' Comment Delete',
+               [comment.article, comment],
+               method: :delete,
+               data: { confirm: 'Delete comment?' },
+               class: "btn btn-sm btn-danger glyphicon glyphicon-remove" %>
+  </div>
+</div>

@@ -3,11 +3,15 @@ class ArticlesController < ApplicationController
   before_action :admin_user,     only: :approve
 
   def index
-    @articles = Article.order('created_at DESC')
+    @articles = Article.paginate(:page => params[:page],
+                                 :per_page => 5
+                                ).order('created_at DESC')
   end
 
-  def approved
-    @articles = Article.where(approved: true)
+  def featured
+    @articles = Article.paginate(:page => params[:page],
+                                 :per_page => 5
+                                ).where(featured: true).order('created_at DESC')
   end
 
   def show
@@ -50,26 +54,14 @@ class ArticlesController < ApplicationController
     end
   end
 
-  def approve
+  def feature
     @article = Article.find(params[:id])
-    @article.toggle!(:approved)
-    if @article.approved?
-      flash[:success] = 'Article approved.'
+    @article.toggle!(:featured)
+    if @article.featured?
+      flash[:success] = 'Article featured.'
       redirect_to request.referrer || articles_path
     else
-      flash[:danger] = 'Article unapproved.'
-      redirect_to request.referrer || articles_path
-    end
-  end
-
-  def frontpage
-    @article = Article.find(params[:id])
-    @article.toggle!(:frontpage)
-    if @article.frontpage?
-      flash[:success] = 'Article added to the Front Page.'
-      redirect_to request.referrer || articles_path
-    else
-      flash[:danger] = 'Article removed from the Front Page.'
+      flash[:danger] = 'Article unfeatured.'
       redirect_to request.referrer || articles_path
     end
   end

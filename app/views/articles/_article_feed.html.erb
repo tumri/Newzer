@@ -1,3 +1,5 @@
+<%= will_paginate @articles %>
+
 <% @articles.each do |article| %>
 
   <div class='panel panel-default'>
@@ -42,34 +44,35 @@
         <% if current_user.admin? || current_user?(article.user) %>
 
           <div class='article-buttons'>
-            <% if article.approved? %>
+            <% if article.featured? %>
               <span class='glyphicon glyphicon-ok btn-sm'></span>
             <% end %>
 
             <% if current_user.admin? %>
-              <% if article.approved? %>
-                <%= link_to 'Revoke Approval',
+              <% if article.featured? %>
+                <%= link_to '',
                           article,
-                          method: :approve,
-                          data: { confirm: 'Confirm revoke approval?'},
-                          class: 'btn btn-sm btn-danger' %>
+                          method: :feature,
+                          data: { confirm: 'Unfeature this article?'},
+                          class: 'btn btn-sm btn-danger glyphicon glyphicon-star' %>
                 <% else %>
-                <%= link_to 'Approve',
+                <%= link_to '',
                             article,
-                            method: :approve,
-                            data: { confirm: 'Confirm approval?'},
-                            class: 'btn btn-sm btn-success' %>
+                            method: :feature,
+                            data: { confirm: 'Feature this article?'},
+                            class: 'btn btn-sm btn-success glyphicon glyphicon-star-empty' %>
                 <% end %>
             <% end %>
 
-            <%= link_to 'Edit Article', edit_article_path(article),
-            class: 'btn btn-sm btn-warning' %>
+            <%= link_to ' Edit',
+                        edit_article_path(article),
+                        class: 'btn btn-sm btn-warning glyphicon glyphicon-pencil' %>
 
-            <%= link_to 'Delete',
+            <%= link_to ' Delete',
                          article,
                          method: :delete,
                          data: { confirm: 'Are you sure?' },
-                         class: 'btn btn-sm btn-danger'%>
+                         class: 'btn btn-sm btn-danger glyphicon glyphicon-remove'%>
           </div>
 
         <% end %>
@@ -80,3 +83,5 @@
   </div>
 
 <% end %>
+
+<%= will_paginate @articles %>

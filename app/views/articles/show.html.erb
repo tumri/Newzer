@@ -30,28 +30,44 @@
 
     <% if current_user.admin? %>
       <% if @article.approved? %>
-        <%= link_to 'Revoke Approval',
-                  @article,
-                  method: :approve,
-                  data: { confirm: 'Confirm revoke approval?'},
-                  class: 'btn btn-sm btn-danger' %>
+        <%= link_to '',
+                  article_path(@article),
+                  method: :feature,
+                  data: { confirm: 'Unfeature this article?'},
+                  class: 'btn btn-sm btn-danger glyphicon glyphicon-star' %>
         <% else %>
-        <%= link_to 'Approve',
-                    @article,
-                    method: :approve,
-                    data: { confirm: 'Confirm approval?'},
-                    class: 'btn btn-sm btn-success' %>
+        <%= link_to '',
+                    article_path(@article),
+                    method: :feature,
+                    data: { confirm: 'Feature this article?'},
+                    class: 'btn btn-sm btn-success glyphicon glyphicon-star-empty' %>
         <% end %>
     <% end %>
 
-    <%= link_to 'Edit Article', edit_article_path(@article),
-    class: 'btn btn-sm btn-warning' %>
+    <%= link_to ' Edit',
+                edit_article_path(@article),
+                class: 'btn btn-sm btn-warning glyphicon glyphicon-pencil' %>
 
-    <%= link_to 'Delete',
-                 @article,
+    <%= link_to ' Delete',
+                 article_path(@article),
                  method: :delete,
                  data: { confirm: 'You sure?' },
-                 class: 'btn btn-sm btn-danger'%>
+                 class: 'btn btn-sm btn-danger glyphicon glyphicon-remove'%>
   </div>
 
 <% end %>
+
+</br>
+</br>
+
+<div class='comments'>
+
+  <h4><%= @article.comments.count %> Comments</h4>
+
+  <%= render @article.comments %>
+
+  <h4>Add a comment:</h4>
+
+  <%= render 'comments/form' %>
+
+</div>
