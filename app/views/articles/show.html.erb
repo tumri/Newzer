@@ -20,7 +20,7 @@
   <li>Updated: <%= @article.updated_at %></li>
 </span>
 
-<% if current_user.admin? || current_user?(@article.user) %>
+<% if logged_in? && (current_user.admin? || current_user?(@article.user)) %>
 
   <div class='article-buttons'>
 
@@ -57,6 +57,7 @@
 
 <% end %>
 
+
 </br>
 </br>
 
@@ -64,10 +65,23 @@
 
   <h4><%= @article.comments.count %> Comments</h4>
 
+
+
+  <div id='comment-form-container'>
+  </div>
+
+
+
   <%= render @article.comments %>
 
-  <h4>Add a comment:</h4>
+  <% if logged_in? %>
 
-  <%= render 'comments/form' %>
+  <div id='comment-form'>
+    <h4>Add a comment:</h4>
+
+    <%= render 'comments/form' %>
+  </div>
+
+  <% end %>
 
 </div>

@@ -40,42 +40,40 @@
         <li>Updated: <%= article.updated_at %></li>
       </span>
 
-      <% if logged_in? %>
-        <% if current_user.admin? || current_user?(article.user) %>
+      <% if logged_in? && (current_user.admin? || current_user?(@article.user)) %>
 
-          <div class='article-buttons'>
+        <div class='article-buttons'>
+          <% if article.featured? %>
+            <span class='glyphicon glyphicon-ok btn-sm'></span>
+          <% end %>
+
+          <% if current_user.admin? %>
             <% if article.featured? %>
-              <span class='glyphicon glyphicon-ok btn-sm'></span>
-            <% end %>
-
-            <% if current_user.admin? %>
-              <% if article.featured? %>
-                <%= link_to '',
+              <%= link_to '',
+                        article,
+                        method: :feature,
+                        data: { confirm: 'Unfeature this article?'},
+                        class: 'btn btn-sm btn-danger glyphicon glyphicon-star' %>
+              <% else %>
+              <%= link_to '',
                           article,
                           method: :feature,
-                          data: { confirm: 'Unfeature this article?'},
-                          class: 'btn btn-sm btn-danger glyphicon glyphicon-star' %>
-                <% else %>
-                <%= link_to '',
-                            article,
-                            method: :feature,
-                            data: { confirm: 'Feature this article?'},
-                            class: 'btn btn-sm btn-success glyphicon glyphicon-star-empty' %>
-                <% end %>
-            <% end %>
+                          data: { confirm: 'Feature this article?'},
+                          class: 'btn btn-sm btn-success glyphicon glyphicon-star-empty' %>
+              <% end %>
+          <% end %>
 
-            <%= link_to ' Edit',
-                        edit_article_path(article),
-                        class: 'btn btn-sm btn-warning glyphicon glyphicon-pencil' %>
+          <%= link_to ' Edit',
+                      edit_article_path(article),
+                      class: 'btn btn-sm btn-warning glyphicon glyphicon-pencil' %>
 
-            <%= link_to ' Delete',
-                         article,
-                         method: :delete,
-                         data: { confirm: 'Are you sure?' },
-                         class: 'btn btn-sm btn-danger glyphicon glyphicon-remove'%>
-          </div>
+          <%= link_to ' Delete',
+                       article,
+                       method: :delete,
+                       data: { confirm: 'Are you sure?' },
+                       class: 'btn btn-sm btn-danger glyphicon glyphicon-remove'%>
+        </div>
 
-        <% end %>
       <% end %>
 
     </div>
