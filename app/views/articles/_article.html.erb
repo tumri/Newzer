@@ -1,0 +1,91 @@
+<% if article.featured?%>
+  <div class='panel panel-primary'>
+<% else %>
+  <div class='panel panel-default'>
+<% end %>
+
+  <div class='panel-heading'>
+
+    <h3 class='panel-title'>
+
+    <%= link_to article.title.html_safe, article %>
+
+    <% if article.featured?%>
+      <%= button_to article.category.name,
+                  article.category,
+                  class: 'article-tag label label-danger clear' %>
+    <% else %>
+      <span class='label label-default clear article-tag'>
+      <%= link_to article.category.name,
+                  article.category %>
+      </span>
+    <% end %>
+
+    </h3>
+
+  </div>
+
+  <div class='panel-body'>
+
+    <p><%= article.body.html_safe %></p>
+
+    <div>
+      <%= link_to gravatar_for(article.user, size: 50), article.user %>
+
+      <span class='user'>
+      <% if article.user.admin? %>
+        <%= link_to article.user.name,
+                    article.user,
+                    class: 'admin-user' %>
+      <% else %>
+        <%= link_to article.user.name,
+                    article.user %>
+      <% end %>
+      </span>
+
+    </div>
+
+    <span class='article-time'>
+      <li>Created: <%= article.created_at %></li>
+      <li>Updated: <%= article.updated_at %></li>
+    </span>
+
+    <% if logged_in? && (current_user.admin? || current_user?(@article.user)) %>
+
+      <div class='article-buttons'>
+        <% if article.featured? %>
+          <span class='glyphicon glyphicon-ok btn-sm'></span>
+        <% end %>
+
+        <% if current_user.admin? %>
+          <% if article.featured? %>
+            <%= link_to '',
+                      article,
+                      method: :feature,
+                      data: { confirm: 'Unfeature this article?'},
+                      class: 'btn btn-sm btn-primary glyphicon glyphicon-star' %>
+            <% else %>
+            <%= link_to '',
+                        article,
+                        method: :feature,
+                        data: { confirm: 'Feature this article?'},
+                        class: 'btn btn-sm btn-primary glyphicon glyphicon-star-empty' %>
+            <% end %>
+        <% end %>
+
+        <%= link_to '',
+                    edit_article_path(article),
+                    class: 'btn btn-sm btn-warning glyphicon glyphicon-pencil' %>
+
+        <%= link_to '',
+                     article,
+                     method: :delete,
+                     data: { confirm: 'Delete this article?' },
+                     class: 'btn btn-sm btn-danger glyphicon glyphicon-remove'%>
+      </div>
+
+    <% end %>
+
+  </div>
+
+</div>

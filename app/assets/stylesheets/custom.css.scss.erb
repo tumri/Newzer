@@ -48,6 +48,8 @@
 
 $gray-medium-light: #eaeaea;
 
+$brand-default: #222222;
+
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
   -webkit-box-sizing: border-box;
@@ -93,6 +95,15 @@ textarea {
   }
 }
 
+.clear{
+  clear: both;
+}
+
+.wrap{
+  overflow: hidden;
+  word-wrap: break-word;
+}
+
 /* callouts */
 
 @mixin bs-callout($color, $bgcolor) {
@@ -114,6 +125,10 @@ textarea {
   code, .highlight {
     background-color: #fff;
   }
+}
+
+.bs-callout-default {
+  @include bs-callout($brand-default, lighten($brand-default, 45%));
 }
 
 .bs-callout-primary {
@@ -184,6 +199,7 @@ p {
 /* footer */
 
 footer {
+  clear: both;
   margin-top: 45px;
   padding-top: 5px;
   border-top: 1px solid $gray-medium-light;
@@ -301,40 +317,48 @@ aside {
 
 /* articles */
 
-.new-article-button{
+.new-article-button {
   margin-top: 13px;
 }
 
-.article-edit-header{
+.article-edit-header {
   padding: 10px 20px;
   border: 1px solid $gray-lighter;
 }
 
-.article-buttons{
+.article-buttons {
   display: inline-block;
   float: right;
 }
 
-.article-tag{
+.article-tag {
   display: inline-block;
   float: right;
+  a {
+    color: white;
+  }
 }
 
-.article-time{
+.article-time {
   font-size: .7em;
   float: left;
+  li {
+    list-style: none;
+  }
 }
-.article-time li{
-  list-style: none;
+
+.article-title {
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 /* categories */
 
-.category-div{
+.category-div {
   margin-bottom: 1%;
 }
 
-@mixin category-button{
+@mixin category-button {
   font-size: 2em;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-weight: 900;
@@ -348,53 +372,71 @@ aside {
   -moz-background-size: cover;
 }
 
-.category-button-1{
+.category-button-1 {
   @include category_button;
   background-image: url('<%= asset_path('image-placeholder.png') %>');
 }
 
-.category-button-2{
+.category-button-2 {
   @include category_button;
   background-image: url('<%= asset_path('image-placeholder.png') %>');
 }
-.category-button-3{
+.category-button-3 {
   @include category_button;
   background-image: url('<%= asset_path('image-placeholder.png') %>');
 }
-.category-button-4{
+.category-button-4 {
   @include category_button;
   background-image: url('<%= asset_path('image-placeholder.png') %>');
 }
-.category-button-5{
+.category-button-5 {
   @include category_button;
   background-image: url('<%= asset_path('image-placeholder.png') %>');
 }
-.category-button-6{
+.category-button-6 {
   @include category_button;
   background-image: url('<%= asset_path('image-placeholder.png') %>');
 }
-.category-button-7{
+.category-button-7 {
   @include category_button;
   background-image: url('<%= asset_path('image-placeholder.png') %>');
 }
-.category-button-8{
+.category-button-8 {
   @include category_button;
   background-image: url('<%= asset_path('image-placeholder.png') %>');
 }
-.category-button-9{
+.category-button-9 {
   @include category_button;
   background-image: url('<%= asset_path('image-placeholder.png') %>');
 }
-.category-button-10{
+.category-button-10 {
   @include category_button;
   background-image: url('<%= asset_path('image-placeholder.png') %>');
 }
-.category-button-11{
+.category-button-11 {
   @include category_button;
   background-image: url('<%= asset_path('image-placeholder.png') %>');
 }
-.category-button-12{
+.category-button-12 {
   @include category_button;
   background-image: url('<%= asset_path('image-placeholder.png') %>');
 }
 
+/* Comments */
+
+.comment-container {
+  margin-top: 1.5%;
+  clear:both;
+}
+
+.comment-time {
+  font-size: .7em;
+  color: $gray-light;
+  float: left;
+}
+
+.comment-delete {
+  font-size: .7em;
+  display: inline-block;
+  float: right;
+}

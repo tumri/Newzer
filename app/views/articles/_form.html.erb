@@ -1,15 +1,11 @@
 <%= render 'article_error_messages' %>
 <span class=<%= "data-no-turbolinks='true'".html_safe %>>
-<%= form_for @article do |f| %>
-  <div>
-    <%= f.label :title %>
-  </div>
+<%= bootstrap_form_for @article do |f| %>
+
   <div>
     <%= f.text_field :title %>
   </div>
-  <div>
-    <%= f.label :category %>
-  </div>
+
   <div>
     <%= f.collection_select  :category_id,
                              Category.all,
@@ -17,14 +13,17 @@
                              :name,
                              include_blank: false %>
   </div>
+
   <div>
     <%= f.label :body %>
   </div>
   <div>
     <%= f.cktext_area :body, rows: 10 %>
   </div>
+
   <div>
     <%= f.submit %>
   </div>
+
 <% end %>
 </span>

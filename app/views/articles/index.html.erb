@@ -3,6 +3,11 @@
             new_article_path,
             class: 'new-article-button btn btn-block btn-primary' %>
 </div>
+
 <br>
 
-<%= render 'article_feed' %>
+<%= will_paginate @articles %>
+
+<%= render @articles %>
+
+<%= will_paginate @articles %>

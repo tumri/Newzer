@@ -1,19 +1,28 @@
-<div class='comment clearfix'>
-  <div class='comment content'>
-    <p class='comment_name'>
+<div class='panel panel-default clear wrap'>
+
+  <div class='panel-heading'>
+    <p class='panel-title'>
       <strong>
         <%= link_to "#{comment.user.try(:name)}",
                     comment.user %>
       </strong>
     </p>
-    <p class='comment_body'><%= comment.body %></p>
-    <p class='comment_time'><%= comment.created_at %></p>
   </div>
-  <div>
-    <%= link_to ' Comment Delete',
-               [comment.article, comment],
-               method: :delete,
-               data: { confirm: 'Delete comment?' },
-               class: "btn btn-sm btn-danger glyphicon glyphicon-remove" %>
+  <div class='panel-body'>
+    <p class='comment-body'><%= comment.body %></p>
+    <p class='comment-time'><span title=<%= comment.updated_at.localtime.asctime.split.join('-') %>>
+     <%= distance_of_time_in_words_to_now(comment.updated_at) %>
+</span> ago</p>
+
+    <% if logged_in? && current_user.admin? %>
+      <div>
+      <%= link_to '',
+                  [comment.article, comment],
+                  method: :delete,
+                  data: { confirm: 'Delete comment?' },
+                  class: "btn btn-xs btn-danger glyphicon glyphicon-remove comment-delete" %>
+      </div>
+    <% end %>
   </div>
+
 </div>

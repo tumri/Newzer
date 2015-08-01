@@ -24,6 +24,8 @@ gem 'commontator',             '>=4.10.5'
 gem 'will_paginate',           '>=3.0.7'
 # Provides pagination with Bootstrap.
 gem 'bootstrap-will_paginate', '>=0.0.10'
+# Bootstrap rails form builder.
+gem 'bootstrap_form',          '>=2.3.0'
 # Use Bootstrap in Sass format
 gem 'bootstrap-sass',          '~>3.3.4.1'
 # Use SCSS for stylesheets
