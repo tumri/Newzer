@@ -18,8 +18,8 @@ gem 'mini_magick',             '>=4.2.7'
 gem 'bcrypt',                  '~>3.1.10'
 # Faker generates fake data.
 gem 'faker',                   '>=1.4.2'
-# Provides comment functionality.
-gem 'commontator',             '>=4.10.5'
+# Provides hierarchy functionality.
+gem 'closure_tree',            '>=5.2.0'
 # Provides pagination functionality.
 gem 'will_paginate',           '>=3.0.7'
 # Provides pagination with Bootstrap.

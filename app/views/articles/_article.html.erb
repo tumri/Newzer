@@ -11,9 +11,11 @@
     <%= link_to article.title.html_safe, article %>
 
     <% if article.featured?%>
-      <%= button_to article.category.name,
+      <%= link_to article.category.name,
                   article.category,
-                  class: 'article-tag label label-danger clear' %>
+                  class: 'label label-danger
+                          article-tag
+                          clear' %>
     <% else %>
       <span class='label label-default clear article-tag'>
       <%= link_to article.category.name,
@@ -27,7 +29,7 @@
 
   <div class='panel-body'>
 
-    <p><%= article.body.html_safe %></p>
+    <p class='row'><%= article.body.html_safe %></p>
 
     <div>
       <%= link_to gravatar_for(article.user, size: 50), article.user %>
@@ -60,28 +62,32 @@
         <% if current_user.admin? %>
           <% if article.featured? %>
             <%= link_to '',
-                      article,
-                      method: :feature,
-                      data: { confirm: 'Unfeature this article?'},
-                      class: 'btn btn-sm btn-primary glyphicon glyphicon-star' %>
+                        feature_article_path(article),
+                        method: :post,
+                        data: { confirm: 'Unfeature this article?'},
+                        class: 'btn btn-sm btn-primary
+                                glyphicon glyphicon-star' %>
             <% else %>
             <%= link_to '',
-                        article,
-                        method: :feature,
+                        feature_article_path(article),
+                        method: :post,
                         data: { confirm: 'Feature this article?'},
-                        class: 'btn btn-sm btn-primary glyphicon glyphicon-star-empty' %>
+                        class: 'btn btn-sm btn-primary
+                                glyphicon glyphicon-star-empty' %>
             <% end %>
         <% end %>
 
         <%= link_to '',
                     edit_article_path(article),
-                    class: 'btn btn-sm btn-warning glyphicon glyphicon-pencil' %>
+                    class: 'btn btn-sm btn-warning
+                            glyphicon glyphicon-pencil' %>
 
         <%= link_to '',
                      article,
                      method: :delete,
                      data: { confirm: 'Delete this article?' },
-                     class: 'btn btn-sm btn-danger glyphicon glyphicon-remove'%>
+                     class: 'btn btn-sm btn-danger
+                             glyphicon glyphicon-remove'%>
       </div>
 
     <% end %>

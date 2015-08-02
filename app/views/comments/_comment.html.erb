@@ -1,28 +1,40 @@
-<div class='panel panel-default clear wrap'>
+<div class='row'>
+  <div class='col-md-6'>
+    <div class='panel panel-default clear wrap'>
 
-  <div class='panel-heading'>
-    <p class='panel-title'>
-      <strong>
-        <%= link_to "#{comment.user.try(:name)}",
-                    comment.user %>
-      </strong>
-    </p>
-  </div>
-  <div class='panel-body'>
-    <p class='comment-body'><%= comment.body %></p>
-    <p class='comment-time'><span title=<%= comment.updated_at.localtime.asctime.split.join('-') %>>
-     <%= distance_of_time_in_words_to_now(comment.updated_at) %>
-</span> ago</p>
-
-    <% if logged_in? && current_user.admin? %>
-      <div>
-      <%= link_to '',
-                  [comment.article, comment],
-                  method: :delete,
-                  data: { confirm: 'Delete comment?' },
-                  class: "btn btn-xs btn-danger glyphicon glyphicon-remove comment-delete" %>
+      <div class='panel-heading'>
+        <p class='panel-title'>
+          <strong>
+            <%= link_to "#{comment.user.try(:name)}",
+                        comment.user %>
+          </strong>
+        </p>
       </div>
-    <% end %>
-  </div>
+      <div class='panel-body'>
+        <p class='comment-body'><%= comment.body %></p>
+        <p class='comment-time'>
+          <span title=<%= comment.updated_at.localtime.asctime.split.join('-') %>>
+            <%= distance_of_time_in_words_to_now(comment.updated_at) %> ago
+          </span>
+        </p>
 
+        <p>
+
+        </p>
+
+        <% if logged_in? && current_user.admin? %>
+          <div>
+          <%= link_to '',
+                      [comment.article, comment],
+                      method: :delete,
+                      data: { confirm: 'Delete comment?' },
+                      class: "btn btn-xs btn-danger
+                              glyphicon glyphicon-remove
+                              comment-delete" %>
+          </div>
+        <% end %>
+      </div>
+
+    </div>
+  </div>
 </div>

@@ -29,8 +29,6 @@ Rails.application.routes.draw do
 
   get       'featured'                 => 'articles#featured'
 
-  post      '/articles/:id'            => 'articles#feature'
-
   get       'categories'               => 'categories#index'
 
   resources :users
@@ -41,7 +39,10 @@ Rails.application.routes.draw do
 
   resources :articles do
     resources :comments
+    member { post :feature }
   end
+
+  post      'feature_article'          => 'articles#feature'
 
   resources :categories,          only: [:index, :show]
 end

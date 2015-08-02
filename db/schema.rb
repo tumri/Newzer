@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150729111419) do
+ActiveRecord::Schema.define(version: 20150801194028) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "title"
@@ -51,12 +51,22 @@ ActiveRecord::Schema.define(version: 20150729111419) do
   add_index "ckeditor_assets", ["assetable_type", "assetable_id"], name: "idx_ckeditor_assetable"
   add_index "ckeditor_assets", ["assetable_type", "type", "assetable_id"], name: "idx_ckeditor_assetable_type"
 
+  create_table "comment_hierarchies", id: false, force: :cascade do |t|
+    t.integer "ancestor_id",   null: false
+    t.integer "descendant_id", null: false
+    t.integer "generations",   null: false
+  end
+
+  add_index "comment_hierarchies", ["ancestor_id", "descendant_id", "generations"], name: "index_comment_hierarchy_for_descendant_leaf_select", unique: true
+  add_index "comment_hierarchies", ["descendant_id"], name: "index_comment_hierarchy_for_ancestor_select"
+
   create_table "comments", force: :cascade do |t|
     t.string   "body"
     t.integer  "article_id"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer  "parent_id"
   end
 
   add_index "comments", ["article_id", "created_at"], name: "index_comments_on_article_id_and_created_at"

@@ -80,12 +80,22 @@ body {
   padding-top: 60px;
 }
 
+@media all and (max-width: 1000px) {
+  body {
+    margin: 0% 7%;
+  }
+}
+
 section {
   overflow: auto;
 }
 
 textarea {
   resize: vertical;
+}
+
+img {
+  max-width: 100%;
 }
 
 .center {
@@ -183,15 +193,14 @@ p {
 
 #logo {
   float: left;
+  padding-left: 10%;
   margin-right: 10px;
   font-size: 1.7em;
-  color: white;
   text-transform: uppercase;
   letter-spacing: -1px;
   padding-top: 9px;
   font-weight: bold;
   &:hover {
-    color: white;
     text-decoration: none;
   }
 }
@@ -427,16 +436,28 @@ aside {
 .comment-container {
   margin-top: 1.5%;
   clear:both;
-}
 
-.comment-time {
+  .comment-time {
   font-size: .7em;
   color: $gray-light;
   float: left;
-}
+  }
 
-.comment-delete {
+  .comment-delete {
   font-size: .7em;
   display: inline-block;
   float: right;
+  }
+}
+
+#comment-form {
+  .comment-box{
+    width: 50%;
+    display: inline-block;
+    float: left;
+  }
+  .comment-submit {
+    display: inline-block;
+    float:left;
+  }
 }

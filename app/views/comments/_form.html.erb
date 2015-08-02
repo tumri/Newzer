@@ -1,12 +1,20 @@
 <%= bootstrap_form_for([@article, @article.comments.build]) do |f| %>
 
+<div class='col-md-8'>
 <%= f.text_area :body,
                 :maxlength => 500,
                 rows: 3,
                 hide_label: true,
-                placeholder: "Leave a comment..."
-                %>
+                placeholder: "Leave a comment...",
+                class: ""%>
+</div>
 
-<%= f.submit "Submit", class: "btn btn-sm btn-success" %>
+<div class='col-md'>
+<%= f.button '',
+             type: 'submit',
+             class: "btn btn-sm btn-success
+                     glyphicon glyphicon-comment
+                     " %>
+</div>
 
 <% end %>

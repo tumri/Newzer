@@ -9,19 +9,18 @@
     <% if @article.featured?%>
       <h3 class='bs-callout-primary'>
         <%= @article.title.html_safe %>
-        <div class='article-tag label label-danger'>
+        <div class='label label-danger article-tag'>
           <%= @article.category.name %>
         </div>
       </h3>
     <% else %>
-        <h3 class='bs-callout-default'>
-          <%= @article.title.html_safe %>
-          <div class='article-tag label label-default'>
-            <%= @article.category.name %>
-          </div>
-        </h3>
+      <h3 class='bs-callout-default'>
+        <%= @article.title.html_safe %>
+        <div class='label label-default article-tag'>
+          <%= @article.category.name %>
+        </div>
+      </h3>
     <% end %>
-
 
   </div>
 
@@ -62,15 +61,15 @@
       <% if current_user.admin? %>
         <% if @article.featured? %>
           <%= link_to '',
-                      article_path(@article),
-                      method: :feature,
+                      feature_article_path(@article),
+                      method: :post,
                       data: { confirm: 'Unfeature this article?'},
                       class: 'btn btn-sm btn-primary
                               glyphicon glyphicon-star' %>
           <% else %>
           <%= link_to '',
-                      article_path(@article),
-                      method: :feature,
+                      feature_article_path(@article),
+                      method: :post,
                       data: { confirm: 'Feature this article?'},
                       class: 'btn btn-sm btn-primary
                               glyphicon glyphicon-star-empty' %>
@@ -102,16 +101,16 @@
 
 
 
-  <div id='comment-form-fix' class='col-md-8'>
+  <div id='comment-form-fix'>
   </div>
 
-  <div class='comment-container col-md-6'>
+  <div class='comment-container'>
     <%= render @article.comments %>
   </div>
 
   <% if logged_in? %>
 
-  <div id='comment-form'>
+  <div id='comment-form' class='row'>
     <%= render 'comments/form' %>
   </div>
 
