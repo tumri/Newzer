@@ -68,6 +68,10 @@ $brand-default: #222222;
 
 /* universal */
 
+html {
+  overflow-y: scroll;
+}
+
 pre {
   font-family: 'Menlo', monospace !important;
   font-size: 14px;
@@ -82,7 +86,7 @@ body {
 
 @media all and (max-width: 1000px) {
   body {
-    margin: 0% 7%;
+    margin: 0% 0%;
   }
 }
 
@@ -97,6 +101,12 @@ textarea {
 img {
   max-width: 100%;
 }
+
+img.center {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
 .center {
   text-align: center;
@@ -193,8 +203,8 @@ p {
 
 #logo {
   float: left;
-  padding-left: 10%;
   margin-right: 10px;
+  padding-left: 10%;
   font-size: 1.7em;
   text-transform: uppercase;
   letter-spacing: -1px;
@@ -205,6 +215,11 @@ p {
   }
 }
 
+@media all and (max-width: 1000px) {
+  #logo{
+  padding-left: 2.5%;
+  }
+}
 /* footer */
 
 footer {

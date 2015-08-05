@@ -39,10 +39,14 @@ Rails.application.routes.draw do
 
   resources :articles do
     resources :comments
+    member { post :approve }
     member { post :feature }
   end
 
+  post      'approve_article'          => 'articles#approve'
   post      'feature_article'          => 'articles#feature'
+
+  resources :comments
 
   resources :categories,          only: [:index, :show]
 end

@@ -63,14 +63,14 @@
           <%= link_to '',
                       feature_article_path(@article),
                       method: :post,
-                      data: { confirm: 'Unfeature this article?'},
+                      data: { confirm: 'Unfeature Article?'},
                       class: 'btn btn-sm btn-primary
                               glyphicon glyphicon-star' %>
           <% else %>
           <%= link_to '',
                       feature_article_path(@article),
                       method: :post,
-                      data: { confirm: 'Feature this article?'},
+                      data: { confirm: 'Feature Article?'},
                       class: 'btn btn-sm btn-primary
                               glyphicon glyphicon-star-empty' %>
           <% end %>
@@ -84,7 +84,7 @@
       <%= link_to '',
                   article_path(@article),
                   method: :delete,
-                  data: { confirm: 'Delete this article??' },
+                  data: { confirm: 'Delete Article??' },
                   class: 'btn btn-sm btn-danger
                           glyphicon glyphicon-remove'%>
     </div>
