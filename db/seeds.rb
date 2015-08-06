@@ -69,32 +69,36 @@ User.create!(name:               'User Tester',
 end
 
 users = User.order(:id)
-10.times do
+1.times do
   users.each do |user|
-                title = Faker::App.name
-                image = Faker::Avatar.image
-                lorem = Faker::Lorem.paragraph(25)
-                ipsum = Faker::Lorem.paragraph(25)
-                body = "<img src='#{image}' class='center'>
-                       <div>
-                        <p> #{lorem}<p>
-                        <p> #{ipsum}<p>
-                       </div>"
-                category = Faker::Number.between(1, 9)
-                user.articles.create!(title: title,
-                                      body: body,
-                                      category_id: category)
+    title_a = Faker::Hacker.adjective
+    title_b = Faker::Hacker.abbreviation
+    title_c = Faker::Hacker.noun
+    title_d = Faker::Hacker.ingverb
+    title = "#{title_a} #{title_b} #{title_c} #{title_d}"
+    image = Faker::Avatar.image
+    lorem = Faker::Lorem.paragraph(25)
+    ipsum = Faker::Lorem.paragraph(25)
+    body = "<img src='#{image}' class='center'>
+           <div>
+            <p> #{lorem}<p>
+            <p> #{ipsum}<p>
+           </div>"
+    category = Faker::Number.between(1, 9)
+    user.articles.create!(title: title,
+                          body: body,
+                          category_id: category)
   end
 end
 
 articles = Article.order(:id)
-50.times do
+1.times do
   users.each do |user|
-                user_id = user.id
-                article_id = Faker::Number.between(1, articles.count)
-                body = Faker::Hacker.say_something_smart
-                user.comments.create!(body: body,
-                                      article_id: article_id,
-                                      user_id: user_id)
+    user_id = user.id
+    article_id = Faker::Number.between(1, articles.count)
+    body = Faker::Hacker.say_something_smart
+    user.comments.create!(body: body,
+                          article_id: article_id,
+                          user_id: user_id)
   end
 end
