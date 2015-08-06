@@ -9,6 +9,8 @@ class User < ActiveRecord::Base
                 :activation_token,
                 :reset_token
 
+  default_scope -> { order(created_at: :asc) }
+
   before_save   :downcase_email
 
   before_create :create_activation_digest
