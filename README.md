@@ -7,20 +7,26 @@ A personal project to try out CKEditor and create a basic user generated news ar
 
 TODO:
 
+Comment replies to other comments currently require a redirect. An AJAX rendering of the comment form would be beneficial.
+
 Each user/author will have a profile where they can highlight their credentials and advertise their social media profiles. This information will also be shown in minified form on the user/author's articles.
 
 -----
 
 Done:
 
-The login/logout/validation system is reused from RailsTutorial but could be replaced by Devise or similar.
+The login/logout/validation system is a basic implementation but could be replaced by Devise or similar.
 
-User/author avatars are handled through Gravatar but may be replaced with a private avatar system in the future.
+User avatars are handled through Gravatar but may be replaced with a private avatar system in the future.
 
-Each user/author has the ability to post fully formatted articles using CKEditor.
+Each user has the ability to post fully formatted articles using CKEditor. Images/attachments may be direct linked from an outside host such as Imgur or uploaded directly to internal file storage from the CKEditor article form page.
 
-Images/attachments from articles are stored in Amazon S3. File storage is handled by CarrierWave and Fog because Paperclip+AWS-SDK were buggy when used with CKEditor.
+Images/attachments are stored in Amazon S3. File storage is handled by CarrierWave and Fog. Each user's uploads are private and are not available to outside users. If a user is deleted then their attachments/images are deleted from S3 as well.
 
-An admin/editor-in-chief is able to approve articles to be shown on the featured article feed.
+Admins are able to approve articles to be shown on the approved page. An admin is able to feature articles to appear on the featured page. Featured articles that are not also approved do not appear in the featured page. Essentially an article's visibility outside the "Feed" page is determined by it's approval status.
+
+Admins are able to delete users, articles, and comments. They are also able to silently edit an article without altering the user the article is associated with.
 
 Each article is tagged under a category. Users are able to go to a category page, select a category, and view articles from that category.
+
+Users are able to leave comments on articles. Comments may also be replied to in a hierarchical fashion(implemented using closure_tree). A context button is provided so that each comment's parent comment or parent article may be easily found.

@@ -5,7 +5,9 @@ class Comment < ActiveRecord::Base
 
   # attr_accessible :body, :article_id, :user_id
 
-  default_scope -> { order(created_at: :desc) }
+  has_closure_tree order: 'created_at DESC'
+
+  # default_scope -> { order(created_at: :desc) }
 
   validates       :body,         presence: true
   validates       :article_id,   presence: true

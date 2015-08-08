@@ -68,15 +68,15 @@ User.create!(name:               'User Tester',
                activated_at:     Time.zone.now)
 end
 
-users = User.order(:id)
-10.times do
+users = User.order(:id).take(1)
+1.times do
   users.each do |user|
     title_0 = Faker::App.name
     title_1 = Faker::Hacker.adjective
     title_2 = Faker::Hacker.abbreviation
     title_3 = Faker::Hacker.ingverb
     title_4 = Faker::Hacker.noun
-    title = "#{title_0} #{title_1} #{title_2} #{title_3} #{title_4}"
+    title = "#{title_0}: #{title_1} #{title_2} #{title_3} #{title_4}"
     image = Faker::Avatar.image
     lorem = Faker::Lorem.paragraph(25)
     ipsum = Faker::Lorem.paragraph(25)
@@ -93,7 +93,7 @@ users = User.order(:id)
 end
 
 articles = Article.order(:id)
-50.times do
+1.times do
   users.each do |user|
     user_id = user.id
     article_id = Faker::Number.between(1, articles.count)

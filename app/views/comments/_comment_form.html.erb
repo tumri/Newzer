@@ -1,10 +1,11 @@
-<%= bootstrap_form_for(@comment) do |f| %>
+<%= bootstrap_form_for([@article, @article.comments.build]) do |f| %>
 
 <div class='col-md-8'>
 <%= f.text_area :body,
                 :maxlength => 500,
                 rows: 3,
                 hide_label: true,
+                placeholder: "Leave a comment...",
                 class: ""%>
 </div>
 
@@ -14,7 +15,5 @@
              class: "btn btn-sm btn-success
                      glyphicon glyphicon-comment" %>
 </div>
-
-<%= f.hidden_field :parent_id %>
 
 <% end %>

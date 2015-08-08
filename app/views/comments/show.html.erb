@@ -1,20 +1,20 @@
 <div class='row'>
   <div class='col-md-6'>
-    <div class='panel panel-default clear wrap' id='accordian'>
+    <div class='panel panel-default clear wrap'>
 
-      <div class='panel-heading' id="comment_<%= comment.id %>">
+      <div class='panel-heading'>
 
         <p class='panel-title'>
           <strong>
-            <%= link_to "#{comment.user.try(:name)}",
-                        comment.user %>
-            <% if comment.parent_id == nil %>
+            <%= link_to "#{@comment.user.try(:name)}",
+                        @comment.user %>
+            <% if @comment.parent_id == nil %>
               <%= link_to 'Context',
-                          comment.article,
+                          @comment.article,
                           class: "comment-context" %>
             <% else %>
               <%= link_to 'Context',
-                          comment.parent,
+                          @comment.parent,
                           class: "comment-context" %>
             <% end %>
 
@@ -24,21 +24,19 @@
 
       <div class='panel-body'>
 
-        <p class='comment-body'><%= comment.body %></p>
+        <p class='comment-body'><%= @comment.body %></p>
         <p class='comment-time'>
-          <span title=<%= comment.updated_at.localtime.asctime.split.join('-') %>>
-            <%= distance_of_time_in_words_to_now(comment.updated_at) %> ago
+          <span title=<%= @comment.updated_at.localtime.asctime.split.join('-') %>>
+            <%= distance_of_time_in_words_to_now(@comment.updated_at) %> ago
           </span>
         </p>
+
         <div class='comment-buttons'>
           <% if logged_in? %>
             <% from_reply_form ||= nil %>
             <% unless from_reply_form %>
               <%= link_to '',
-                          new_comment_path(comment.id),
-                          data: { toggle: "collapse", parent: "#accordian"},
-                          href: "#reply_collapse_#{comment.id}",
-                          title: 'Reply',
+                          new_comment_path(@comment.id),
                           class: "btn btn-xs btn-default
                                   glyphicon glyphicon-share-alt
                                   comment-reply" %>
@@ -46,7 +44,7 @@
           <% end %>
           <% if logged_in? && current_user.admin? %>
               <%= link_to '',
-                          comment,
+                          @comment,
                           method: :delete,
                           data: { confirm: 'Delete Comment?' },
                           class: "btn btn-xs btn-danger
@@ -54,14 +52,6 @@
                                   comment-delete" %>
           <% end %>
         </div>
-
-          <div id="reply_collapse_<%= comment.id %>" class="collapse">
-            <br>
-            <hr>
-            <div class="panel-body">
-              render :partial => 'comment/form'
-            </div>
-          </div>
 
       </div>
 

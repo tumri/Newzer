@@ -8,20 +8,21 @@
 
     <h3 class='panel-title'>
 
-    <%= link_to article.title.html_safe, article %>
+      <%= link_to article.title.html_safe,
+                  article %>
 
-    <% if article.featured?%>
-      <%= link_to article.category.name,
-                  article.category,
-                  class: 'label label-danger
-                          article-tag
-                          clear' %>
-    <% else %>
-      <span class='label label-default clear article-tag'>
-      <%= link_to article.category.name,
-                  article.category %>
-      </span>
-    <% end %>
+      <% if article.featured?%>
+        <%= link_to article.category.name,
+                    article.category,
+                    class: 'label label-danger
+                            article-tag
+                            clear' %>
+      <% else %>
+        <span class='label label-default clear article-tag'>
+        <%= link_to article.category.name,
+                    article.category %>
+        </span>
+      <% end %>
 
     </h3>
 
@@ -52,11 +53,34 @@
       <li>Updated: <%= article.updated_at %></li>
     </span>
 
-    <% if logged_in? && (current_user.admin? || current_user?(@article.user)) %>
+    <% if logged_in? && (current_user.admin? || current_user?(article.user)) %>
 
       <div class='article-buttons'>
-        <% if article.featured? %>
-          <span class='glyphicon glyphicon-ok btn-sm'></span>
+
+        <% if article.approved? && !current_user.admin? %>
+          <span class='glyphicon glyphicon-eye-open btn-sm'></span>
+        <% end %>
+
+        <% if article.featured? && !current_user.admin? %>
+          <span class='glyphicon glyphicon-star btn-sm'></span>
+        <% end %>
+
+        <% if current_user.admin? %>
+          <% if article.approved? %>
+            <%= link_to '',
+                        approve_article_path(article),
+                        method: :post,
+                        data: { confirm: 'Unapprove this article?'},
+                        class: 'btn btn-sm btn-primary
+                                glyphicon glyphicon-eye-open' %>
+            <% else %>
+            <%= link_to '',
+                        approve_article_path(article),
+                        method: :post,
+                        data: { confirm: 'Approve this article?'},
+                        class: 'btn btn-sm btn-default
+                                glyphicon glyphicon-eye-close' %>
+            <% end %>
         <% end %>
 
         <% if current_user.admin? %>
@@ -72,7 +96,7 @@
                         feature_article_path(article),
                         method: :post,
                         data: { confirm: 'Feature this article?'},
-                        class: 'btn btn-sm btn-primary
+                        class: 'btn btn-sm btn-default
                                 glyphicon glyphicon-star-empty' %>
             <% end %>
         <% end %>

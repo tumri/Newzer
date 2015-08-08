@@ -27,6 +27,8 @@ Rails.application.routes.draw do
 
   get       'articles'                 => 'articles#index'
 
+  get       'approved'                 => 'articles#approved'
+
   get       'featured'                 => 'articles#featured'
 
   get       'categories'               => 'categories#index'
@@ -38,7 +40,7 @@ Rails.application.routes.draw do
   resources :password_resets,     only: [:new, :create, :edit, :update]
 
   resources :articles do
-    resources :comments
+    resources :comments, shallow: true
     member { post :approve }
     member { post :feature }
   end
@@ -46,7 +48,9 @@ Rails.application.routes.draw do
   post      'approve_article'          => 'articles#approve'
   post      'feature_article'          => 'articles#feature'
 
-  resources :comments
+  resources :comments,            only: [:index, :delete, :create]
+
+  get '/comments/new/(:parent_id)', to: 'comments#new', as: :new_comment
 
   resources :categories,          only: [:index, :show]
 end

@@ -1,17 +1,23 @@
 class ArticlesController < ApplicationController
   before_action :logged_in_user, only: [:create, :update, :destroy]
-  before_action :admin_user,     only: :approve
+  before_action :admin_user,     only: [:approve, :feature]
 
   def index
     @articles = Article.paginate(:page => params[:page],
-                                 :per_page => 5
+                                 :per_page => 10
                                 ).order('created_at DESC')
+  end
+
+  def approved
+    @articles = Article.paginate(:page => params[:page],
+                                 :per_page => 5
+                                ).where(approved: true).order('created_at DESC')
   end
 
   def featured
     @articles = Article.paginate(:page => params[:page],
                                  :per_page => 5
-                                ).where(featured: true).order('created_at DESC')
+                                ).where(approved: true, featured: true).order('created_at DESC')
   end
 
   def show

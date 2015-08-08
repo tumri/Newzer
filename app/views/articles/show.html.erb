@@ -54,8 +54,30 @@
 
     <div class='article-buttons'>
 
-      <% if @article.featured? %>
-        <span class='glyphicon glyphicon-ok btn-sm'></span>
+      <% if @article.approved? && !current_user.admin? %>
+        <span class='glyphicon glyphicon-eye-open btn-sm'></span>
+      <% end %>
+
+      <% if @article.featured? && !current_user.admin? %>
+        <span class='glyphicon glyphicon-star btn-sm'></span>
+      <% end %>
+
+      <% if current_user.admin? %>
+        <% if @article.approved? %>
+          <%= link_to '',
+                      approve_article_path(@article),
+                      method: :post,
+                      data: { confirm: 'Unapprove this article?'},
+                      class: 'btn btn-sm btn-primary
+                              glyphicon glyphicon-eye-open' %>
+          <% else %>
+          <%= link_to '',
+                      approve_article_path(@article),
+                      method: :post,
+                      data: { confirm: 'Approve this article?'},
+                      class: 'btn btn-sm btn-default
+                              glyphicon glyphicon-eye-close' %>
+          <% end %>
       <% end %>
 
       <% if current_user.admin? %>
@@ -71,7 +93,7 @@
                       feature_article_path(@article),
                       method: :post,
                       data: { confirm: 'Feature Article?'},
-                      class: 'btn btn-sm btn-primary
+                      class: 'btn btn-sm btn-default
                               glyphicon glyphicon-star-empty' %>
           <% end %>
       <% end %>
@@ -105,13 +127,13 @@
   </div>
 
   <div class='comment-container'>
-    <%= render @article.comments %>
+    <%= comments_tree_for @article.comments.hash_tree %>
   </div>
 
   <% if logged_in? %>
 
   <div id='comment-form' class='row'>
-    <%= render 'comments/form' %>
+    <%= render 'comments/comment_form' %>
   </div>
 
   <% end %>
