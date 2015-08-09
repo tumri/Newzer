@@ -57,13 +57,13 @@ ActiveRecord::Schema.define(version: 20150804220238) do
     t.integer "generations",   null: false
   end
 
-  add_index "comment_hierarchies", ["ancestor_id", "descendant_id", "generations"], name: "index_comment_hierarchy_for_descendant_leaf_select", unique: true
-  add_index "comment_hierarchies", ["descendant_id"], name: "index_comment_hierarchy_for_ancestor_select"
+  add_index "comment_hierarchies", ["ancestor_id", "descendant_id", "generations"], name: "comment_anc_desc_udx", unique: true
+  add_index "comment_hierarchies", ["descendant_id"], name: "comment_desc_idx"
 
   create_table "comments", force: :cascade do |t|
     t.string   "body"
-    t.integer  "article_id"
     t.integer  "user_id"
+    t.integer  "article_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "parent_id"

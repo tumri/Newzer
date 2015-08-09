@@ -56,7 +56,7 @@ User.create!(name:               'User Tester',
              activated:                   true,
              activated_at:       Time.zone.now)
 
-50.times do |n|
+30.times do |n|
   name  = Faker::Name.name
   email = "tester-#{n + 1}@tumri.xyz"
   password = 'password'
@@ -68,8 +68,9 @@ User.create!(name:               'User Tester',
                activated_at:     Time.zone.now)
 end
 
-users = User.order(:id).take(1)
-1.times do
+users = User.order(:id)
+
+2.times do
   users.each do |user|
     title_0 = Faker::App.name
     title_1 = Faker::Hacker.adjective
@@ -93,13 +94,29 @@ users = User.order(:id).take(1)
 end
 
 articles = Article.order(:id)
-1.times do
+
+10.times do
   users.each do |user|
+    body = Faker::Hacker.say_something_smart
     user_id = user.id
     article_id = Faker::Number.between(1, articles.count)
-    body = Faker::Hacker.say_something_smart
     user.comments.create!(body: body,
+                          user_id: user_id,
+                          article_id: article_id)
+  end
+end
+
+comments = Comment.order(:id)
+
+50.times do
+  users.each do |user|
+    body = Faker::Hacker.say_something_smart
+    user_id = user.id
+    article_id = Faker::Number.between(1, articles.count)
+    parent_id = Faker::Number.between(1, comments.count)
+    user.comments.create!(body: body,
+                          user_id: user_id,
                           article_id: article_id,
-                          user_id: user_id)
+                          parent_id: parent_id)
   end
 end

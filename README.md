@@ -29,4 +29,4 @@ Admins are able to delete users, articles, and comments. They are also able to s
 
 Each article is tagged under a category. Users are able to go to a category page, select a category, and view articles from that category.
 
-Users are able to leave comments on articles. Comments may also be replied to in a hierarchical fashion(implemented using closure_tree). A context button is provided so that each comment's parent comment or parent article may be easily found.
+Users are able to leave comments on articles. Comments may also be replied to in a nested hierarchical fashion(implemented using closure_tree). If a root comment is deleted then the replies to that root comment become root comments themselves. A context button is provided so that each comment's parent comment or parent article may be easily found.

@@ -21,3 +21,6 @@
 
 # Ignore Development Uploads
 /public/uploads/*
+
+# Ignore advisory lock file.
+/.lock-ClosureTreeComment-*
