@@ -1,11 +1,7 @@
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
 
+# Category Seeds
 Category.create!(name:             'Editorial')
 Category.create!(name:              'Politics')
 Category.create!(name:               'Economy')
@@ -16,6 +12,7 @@ Category.create!(name:             'Lifestyle')
 Category.create!(name:         'Entertainment')
 Category.create!(name:                 'Other')
 
+# User Seeds
 User.create!(name:                     'Tumri',
              email:           'tumri@live.com',
              password:              'tumri202',
@@ -68,9 +65,10 @@ User.create!(name:               'User Tester',
                activated_at:     Time.zone.now)
 end
 
+# Article Seeds
 users = User.order(:id)
 
-2.times do
+5.times do
   users.each do |user|
     title_0 = Faker::App.name
     title_1 = Faker::Hacker.adjective
@@ -104,6 +102,7 @@ users = User.order(:id)
   end
 end
 
+# Comment Seeds
 articles = Article.order(:id)
 
 10.times do
@@ -117,17 +116,18 @@ articles = Article.order(:id)
   end
 end
 
-# comments = Comment.order(:id)
+# Comment Reply Seeds [Warning: Causes issues when seeding to SQLite DB.]
+comments = Comment.order(:id)
 
-# 50.times do
-#   users.each do |user|
-#     body = Faker::Hacker.say_something_smart
-#     user_id = user.id
-#     article_id = Faker::Number.between(1, articles.count)
-#     parent_id = Faker::Number.between(1, comments.count)
-#     user.comments.create!(body: body,
-#                           user_id: user_id,
-#                           article_id: article_id,
-#                           parent_id: parent_id)
-#   end
-# end
+25.times do
+  users.each do |user|
+    body = Faker::Hacker.say_something_smart
+    user_id = user.id
+    article_id = Faker::Number.between(1, articles.count)
+    parent_id = Faker::Number.between(1, comments.count)
+    user.comments.create!(body: body,
+                          user_id: user_id,
+                          article_id: article_id,
+                          parent_id: parent_id)
+  end
+end
