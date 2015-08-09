@@ -1,23 +1,24 @@
 class ArticlesController < ApplicationController
-  before_action :logged_in_user, only: [:create, :update, :destroy]
-  before_action :admin_user,     only: [:approve, :feature]
+  before_action :logged_in_user, only: [:create, :edit, :update, :destroy]
+  before_action :power_user,     only: [:approve, :feature]
 
   def index
-    @articles = Article.paginate(:page => params[:page],
-                                 :per_page => 10
+    @articles = Article.paginate(page: params[:page],
+                                 per_page: 10
                                 ).order('created_at DESC')
   end
 
   def approved
-    @articles = Article.paginate(:page => params[:page],
-                                 :per_page => 5
+    @articles = Article.paginate(page: params[:page],
+                                 per_page: 10
                                 ).where(approved: true).order('created_at DESC')
   end
 
   def featured
-    @articles = Article.paginate(:page => params[:page],
-                                 :per_page => 5
-                                ).where(approved: true, featured: true).order('created_at DESC')
+    @articles = Article.paginate(page: params[:page],
+                                 per_page: 10
+                                ).where(approved: true,
+                                        featured: true).order('created_at DESC')
   end
 
   def show
@@ -98,7 +99,7 @@ class ArticlesController < ApplicationController
       end
     end
 
-    def admin_user
-      redirect_to(root_url) unless current_user.admin?
+    def power_user
+      redirect_to(root_url) unless current_user.admin? || current_user.mod?
     end
 end

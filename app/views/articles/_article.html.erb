@@ -41,8 +41,14 @@
                     article.user,
                     class: 'admin-user' %>
       <% else %>
-        <%= link_to article.user.name,
-                    article.user %>
+        <% if article.user.mod? %>
+          <%= link_to article.user.name,
+                      article.user,
+                      class: 'mod-user' %>
+        <% else %>
+          <%= link_to article.user.name,
+                      article.user %>
+        <% end %>
       <% end %>
       </span>
 
@@ -53,19 +59,19 @@
       <li>Updated: <%= article.updated_at %></li>
     </span>
 
-    <% if logged_in? && (current_user.admin? || current_user?(article.user)) %>
+    <% if logged_in? && (current_user.admin? || current_user.mod? || current_user?(article.user)) %>
 
       <div class='article-buttons'>
 
-        <% if article.approved? && !current_user.admin? %>
+        <% if article.approved? && !current_user.admin? && !current_user.mod? %>
           <span class='glyphicon glyphicon-eye-open btn-sm'></span>
         <% end %>
 
-        <% if article.featured? && !current_user.admin? %>
+        <% if article.featured? && !current_user.admin? && !current_user.mod? %>
           <span class='glyphicon glyphicon-star btn-sm'></span>
         <% end %>
 
-        <% if current_user.admin? %>
+        <% if current_user.admin? || current_user.mod? %>
           <% if article.approved? %>
             <%= link_to '',
                         approve_article_path(article),
@@ -83,7 +89,7 @@
             <% end %>
         <% end %>
 
-        <% if current_user.admin? %>
+        <% if current_user.admin? || current_user.mod? %>
           <% if article.featured? %>
             <%= link_to '',
                         feature_article_path(article),

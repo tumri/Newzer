@@ -5,11 +5,36 @@
       <h1>
         <%= gravatar_for @user %>
         <% if @user.admin? %>
-          <span style='color: #d9534f';><%= @user.name %></span>
+          <div class='user-name admin-user';><%= @user.name %></div>
         <% else %>
-          <%= @user.name %>
+          <% if @user.mod? %>
+            <div class='user-name mod-user';><%= @user.name %></div>
+          <% else %>
+            <div class='user-name'><%= @user.name %></div>
+          <% end %>
         <% end %>
       </h1>
+      <div>
+        <% if current_user.admin? && !@user.admin?  %>
+          <% if @user.mod? %>
+            <%= link_to '',
+                        promote_user_path(@user),
+                        method: :post,
+                        data: { confirm: 'Demote this Moderator to User?'},
+                        class: 'btn btn-sm btn-success
+                                glyphicon glyphicon-flash
+                                user-promote clear' %>
+          <% else %>
+            <%= link_to '',
+                        promote_user_path(@user),
+                        method: :post,
+                        data: { confirm: 'Promote this User to Moderator?'},
+                        class: 'btn btn-sm btn-default
+                                glyphicon glyphicon-user
+                                user-promote clear' %>
+          <% end %>
+        <% end %>
+      </div>
     </section>
   </aside>
 </div>

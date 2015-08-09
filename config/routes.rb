@@ -33,7 +33,11 @@ Rails.application.routes.draw do
 
   get       'categories'               => 'categories#index'
 
-  resources :users
+  resources :users do
+    member { post :promote }
+  end
+
+  post      'promote_user'             => 'users#promote'
 
   resources :account_activations, only: [:edit]
 

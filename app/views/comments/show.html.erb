@@ -6,8 +6,23 @@
 
         <p class='panel-title'>
           <strong>
-            <%= link_to "#{@comment.user.try(:name)}",
-                        @comment.user %>
+
+            <% if @comment.user.admin? %>
+              <%= link_to "#{@comment.user.try(:name)}",
+                            @comment.user,
+                            class: "admin-user" %>
+            <% else %>
+              <% if @comment.user.mod? %>
+                <%= link_to "#{@comment.user.try(:name)}",
+                            @comment.user,
+                            class: "mod-user" %>
+              <% else %>
+                <%= link_to "#{@comment.user.try(:name)}",
+                            @comment.user %>
+              <% end %>
+            <% end %>
+
+
             <% if @comment.parent_id == nil %>
               <%= link_to 'Context',
                           @comment.article,
@@ -42,7 +57,7 @@
                                   comment-reply" %>
             <% end %>
           <% end %>
-          <% if logged_in? && current_user.admin? %>
+          <% if logged_in? && current_user.admin? || current_user.mod? %>
               <%= link_to '',
                           @comment,
                           method: :delete,

@@ -2,7 +2,7 @@
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 
 # Category Seeds
-Category.create!(name:             'Editorial')
+Category.create!(name:               'Opinion')
 Category.create!(name:              'Politics')
 Category.create!(name:               'Economy')
 Category.create!(name:            'Technology')
@@ -13,19 +13,21 @@ Category.create!(name:         'Entertainment')
 Category.create!(name:                 'Other')
 
 # User Seeds
-User.create!(name:                     'Tumri',
-             email:           'tumri@live.com',
-             password:              'tumri202',
-             password_confirmation: 'tumri202',
-             admin:                       true,
-             activated:                   true,
-             activated_at:       Time.zone.now)
+User.create!(name:                               'Tumri',
+             email:                     'tumri@live.com',
+             password:              "#{ENV['PASSWORD']}",
+             password_confirmation: "#{ENV['PASSWORD']}",
+             admin:                                 true,
+             mod:                                   true,
+             activated:                             true,
+             activated_at:                 Time.zone.now)
 
 User.create!(name:                    'Siddhu',
              email:  'sixarmedfreak@gmail.com',
              password:                'tester',
              password_confirmation:   'tester',
-             admin:                       true,
+             admin:                      false,
+             mod:                         true,
              activated:                   true,
              activated_at:       Time.zone.now)
 
@@ -33,23 +35,35 @@ User.create!(name:                    'Nicole',
              email:    'nickchance1@gmail.com',
              password:                'tester',
              password_confirmation:   'tester',
-             admin:                      true,
+             admin:                      false,
+             mod:                         true,
              activated:                   true,
              activated_at:       Time.zone.now)
 
-User.create!(name:              'Admin Tester',
-             email:   'admin_tester@tumri.xyz',
+User.create!(name:             'Administrator',
+             email:  'administrator@tumri.xyz',
              password:                'tester',
              password_confirmation:   'tester',
              admin:                       true,
+             mod:                         true,
              activated:                   true,
              activated_at:       Time.zone.now)
 
-User.create!(name:               'User Tester',
-             email:    'user_tester@tumri.xyz',
+User.create!(name:                 'Moderator',
+             email:      'moderator@tumri.xyz',
              password:                'tester',
              password_confirmation:   'tester',
              admin:                      false,
+             mod:                         true,
+             activated:                   true,
+             activated_at:       Time.zone.now)
+
+User.create!(name:                      'User',
+             email:           'user@tumri.xyz',
+             password:                'tester',
+             password_confirmation:   'tester',
+             admin:                      false,
+             mod:                        false,
              activated:                   true,
              activated_at:       Time.zone.now)
 
@@ -76,7 +90,6 @@ users = User.order(:id)
     title_3 = Faker::Hacker.ingverb
     title_4 = Faker::Hacker.noun
     title = "#{title_0}: #{title_1} #{title_2} #{title_3} #{title_4}"
-
     image = Faker::Avatar.image
     lorem = Faker::Lorem.paragraph(25)
     ipsum = Faker::Lorem.paragraph(25)
@@ -85,16 +98,13 @@ users = User.order(:id)
               <p> #{lorem}<p>
               <p> #{ipsum}<p>
             </div>"
-
     category = Faker::Number.between(1, 9)
-
     boolean = Faker::Number.between(0, 1)
     if boolean == 1
       approval = true
     else
       approval = false
     end
-
     user.articles.create!(title: title,
                           body: body,
                           category_id: category,
@@ -130,4 +140,20 @@ comments = Comment.order(:id)
                           article_id: article_id,
                           parent_id: parent_id)
   end
+end
+
+1.times do
+  @user = User.find_by_id(1)
+  lorem = Faker::Lorem.paragraph(25)
+  ipsum = Faker::Lorem.paragraph(25)
+  body = "<img src='http://robohash.org/TUMRI.png?set=set2' class='center'>
+          <div>
+            <i> Write stuff about Newzer here. </i>
+            <p> #{lorem} </p>
+            <p> #{ipsum} </p>
+          </div>"
+  @user.articles.create!(title: 'Welcome to Newzer',
+                         body: body,
+                         category_id: 9,
+                         approved: true)
 end
