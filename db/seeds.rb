@@ -78,18 +78,29 @@ users = User.order(:id)
     title_3 = Faker::Hacker.ingverb
     title_4 = Faker::Hacker.noun
     title = "#{title_0}: #{title_1} #{title_2} #{title_3} #{title_4}"
+
     image = Faker::Avatar.image
     lorem = Faker::Lorem.paragraph(25)
     ipsum = Faker::Lorem.paragraph(25)
     body = "<img src='#{image}' class='center'>
-           <div>
-            <p> #{lorem}<p>
-            <p> #{ipsum}<p>
-           </div>"
+            <div>
+              <p> #{lorem}<p>
+              <p> #{ipsum}<p>
+            </div>"
+
     category = Faker::Number.between(1, 9)
+
+    boolean = Faker::Number.between(0, 1)
+    if boolean == 1
+      approval = true
+    else
+      approval = false
+    end
+
     user.articles.create!(title: title,
                           body: body,
-                          category_id: category)
+                          category_id: category,
+                          approved: approval)
   end
 end
 
@@ -106,17 +117,17 @@ articles = Article.order(:id)
   end
 end
 
-comments = Comment.order(:id)
+# comments = Comment.order(:id)
 
-50.times do
-  users.each do |user|
-    body = Faker::Hacker.say_something_smart
-    user_id = user.id
-    article_id = Faker::Number.between(1, articles.count)
-    parent_id = Faker::Number.between(1, comments.count)
-    user.comments.create!(body: body,
-                          user_id: user_id,
-                          article_id: article_id,
-                          parent_id: parent_id)
-  end
-end
+# 50.times do
+#   users.each do |user|
+#     body = Faker::Hacker.say_something_smart
+#     user_id = user.id
+#     article_id = Faker::Number.between(1, articles.count)
+#     parent_id = Faker::Number.between(1, comments.count)
+#     user.comments.create!(body: body,
+#                           user_id: user_id,
+#                           article_id: article_id,
+#                           parent_id: parent_id)
+#   end
+# end
