@@ -62,8 +62,7 @@
                                   glyphicon glyphicon-warning-sign
                                   comment-flag" %>
             <% end %>
-            <% if power_user? %>
-              <% if comment.flagged? %>
+            <% if power_user? && comment.flagged? %>
                 <%= link_to '',
                           unflag_comment_path,
                           method: :post,
@@ -72,6 +71,8 @@
                                   glyphicon glyphicon-check
                                   comment-flag" %>
               <% end %>
+            <% end %>
+            <% if power_user? || current_user = comment.user %>
               <%= link_to '',
                           comment,
                           method: :delete,

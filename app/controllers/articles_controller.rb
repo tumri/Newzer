@@ -1,13 +1,14 @@
 class ArticlesController < ApplicationController
   before_action :logged_in_user, only: [:create,
-                                        :edit,
-                                        :update,
-                                        :destroy,
                                         :report]
 
-  before_action :power_user,     only: [:approve,
-                                        :feature,
-                                        :reported]
+  before_action :correct_user,   only: [:edit,
+                                        :update,
+                                        :destroy]
+
+  before_action :power_user,     only: [:reported,
+                                        :approve,
+                                        :feature]
 
   def index
     @articles = Article.paginate(page: params[:page],
@@ -137,14 +138,15 @@ class ArticlesController < ApplicationController
     end
 
     def power_user
-      redirect_to(root_url) unless current_user.admin? || current_user.mod?
+      store_location
+      flash[:danger] = 'Insufficient privileges.'
+      redirect_to(root_url) unless power_user?
     end
 
-    def admin_user
-      redirect_to(root_url) unless current_user.admin?
-    end
-
-    def mod_user
-      redirect_to(root_url) unless current_user.mod?
+    def correct_user
+      storage_location
+      store_location
+      flash[:danger] = 'Insufficient privileges.'
+      redirect_to(root_url) unless power_user? || current_user == @article.user
     end
 end

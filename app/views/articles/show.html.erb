@@ -80,7 +80,7 @@
 
       <div class='article-buttons'>
 
-        <% unless @article.approved? || current_user = @article.user%>
+        <% unless @article.approved? || current_user = @article.user %>
           <%= link_to '',
                       report_article_path(@article),
                       method: :post,

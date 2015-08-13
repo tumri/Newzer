@@ -1,6 +1,6 @@
 <div class='row'>
   <div class='col-md-6'>
-    <div class='panel panel-default clear wrap overflow'>
+    <div class='panel panel-default clear wrap overflow' id="comment_<%= @comment.id %>">
 
       <div class='panel-heading'>
 
@@ -9,19 +9,16 @@
 
             <% if @comment.user.admin? %>
               <%= link_to "#{@comment.user.try(:name)}",
-                            @comment.user,
-                            class: "admin-user" %>
+                          @comment.user,
+                          class: "admin-user" %>
+            <% elsif @comment.user.mod? %>
+              <%= link_to "#{@comment.user.try(:name)}",
+                          @comment.user,
+                          class: "mod-user" %>
             <% else %>
-              <% if @comment.user.mod? %>
-                <%= link_to "#{@comment.user.try(:name)}",
-                            @comment.user,
-                            class: "mod-user" %>
-              <% else %>
-                <%= link_to "#{@comment.user.try(:name)}",
-                            @comment.user %>
-              <% end %>
+              <%= link_to "#{@comment.user.try(:name)}",
+                          @comment.user %>
             <% end %>
-
 
             <% if @comment.parent_id == nil %>
               <%= link_to 'Context',
@@ -46,28 +43,51 @@
           </span>
         </p>
 
-        <div class='comment-buttons'>
-          <% if logged_in? %>
-            <% from_reply_form ||= nil %>
-            <% unless from_reply_form %>
+        <% if logged_in? %>
+          <div class='comment-buttons'>
+            <%= link_to '',
+                        new_comment_path(@comment.id),
+                        remote: true,
+                        title: 'Reply',
+                        id: "reply_button",
+                        class: "btn btn-xs btn-default
+                                glyphicon glyphicon-share-alt
+                                comment-reply" %>
+            <% unless @comment.unflagged? %>
               <%= link_to '',
-                          new_comment_path(@comment.id),
-                          class: "btn btn-xs btn-default
-                                  glyphicon glyphicon-share-alt
-                                  comment-reply" %>
+                          flag_comment_path,
+                          method: :post,
+                          data: { confirm: 'Flag Comment?' },
+                          class: "btn btn-xs btn-warning
+                                  glyphicon glyphicon-warning-sign
+                                  comment-flag" %>
             <% end %>
-          <% end %>
-          <% if logged_in? && current_user.admin? || current_user.mod? %>
+            <% if power_user? && @comment.flagged? %>
+                <%= link_to '',
+                          unflag_comment_path,
+                          method: :post,
+                          data: { confirm: 'Unflag Comment?' },
+                          class: "btn btn-xs btn-warning
+                                  glyphicon glyphicon-check
+                                  comment-flag" %>
+              <% end %>
+            <% end %>
+            <% if power_user? || current_user = @comment.user %>
               <%= link_to '',
-                          @comment,
+                          comment,
                           method: :delete,
                           data: { confirm: 'Delete Comment?' },
                           class: "btn btn-xs btn-danger
                                   glyphicon glyphicon-remove
                                   comment-delete" %>
-          <% end %>
-        </div>
+            <% end %>
+          </div>
 
+        <% end %>
+
+      </div>
+
+      <div id="reply_form_<%= @comment.id %>">
       </div>
 
     </div>

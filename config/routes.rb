@@ -33,7 +33,7 @@ Rails.application.routes.draw do
 
   get       'featured'                 => 'articles#featured'
 
-  get       'flagged'                 => 'comments#flagged'
+  get       'flagged'                  => 'comments#flagged'
 
   get       '/comments/new/(:parent_id)',
             to: 'comments#new',
