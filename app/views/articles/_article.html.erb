@@ -43,7 +43,11 @@
 
   <div class='panel-body'>
 
+    <span class='article-body'>
+
     <p class='row'><%= article.body.html_safe %></p>
+
+    </span>
 
     <div>
       <%= link_to gravatar_for(article.user, size: 50), article.user %>
@@ -76,7 +80,7 @@
 
       <div class='article-buttons'>
 
-        <% unless article.approved? || current_user = article.user %>
+        <% unless article.approved? || current_user?(article.user) %>
           <%= link_to '',
                       report_article_path(article),
                       method: :post,

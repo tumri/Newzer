@@ -67,7 +67,7 @@
                           unflag_comment_path,
                           method: :post,
                           data: { confirm: 'Unflag Comment?' },
-                          class: "btn btn-xs btn-warning
+                          class: "btn btn-xs btn-success
                                   glyphicon glyphicon-check
                                   comment-flag" %>
             <% end %>
@@ -91,4 +91,6 @@
 
     </div>
   </div>
+</div>
+<div id="ajax_reply_<%= comment.id %>">
 </div>

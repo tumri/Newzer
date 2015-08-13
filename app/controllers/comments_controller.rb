@@ -38,7 +38,12 @@ class CommentsController < ApplicationController
 
       if @comment.save
         flash[:success] = 'Reply added.'
-        redirect_to article_path(@comment.article)
+
+        respond_to do |format|
+          format.html { redirect_to article_path(@comment.article) }
+          format.js   {  }
+        end
+
       else
         flash[:warning] = 'Replies must be between 10 and 500 characters.'
         redirect_to request.referrer

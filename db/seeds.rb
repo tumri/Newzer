@@ -79,6 +79,24 @@ User.create!(name:                                'User',
                activated_at:               Time.zone.now)
 end
 
+# Welcome Article Seed
+1.times do
+  @user = User.find_by_id(1)
+  lorem = Faker::Lorem.paragraph(25)
+  ipsum = Faker::Lorem.paragraph(25)
+  body = "<img src='http://robohash.org/TUMRI.png?set=set2' class='center'>
+          <div>
+            <i> Write stuff about Newzer here. </i>
+            <p> #{lorem} </p>
+            <p> #{ipsum} </p>
+          </div>"
+  @user.articles.create!(title: 'Welcome to Newzer',
+                         body: body,
+                         category_id: 9,
+                         approved: true,
+                         featured: true)
+end
+
 # Article Seeds
 users = User.order(:id)
 
@@ -119,42 +137,25 @@ articles = Article.order(:id)
   users.each do |user|
     body = Faker::Hacker.say_something_smart
     user_id = user.id
-    article_id = Faker::Number.between(1, articles.count)
+    article_id = Faker::Number.between(2, articles.count)
     user.comments.create!(body: body,
                           user_id: user_id,
                           article_id: article_id)
   end
 end
 
-# Comment Reply Seeds [Warning: Causes issues when seeding to SQLite DB.]
-comments = Comment.order(:id)
+# Comment Reply Seeds [Warning: Causes DB to become corrupt often.]
+# comments = Comment.order(:id)
 
-25.times do
-  users.each do |user|
-    body = Faker::Hacker.say_something_smart
-    user_id = user.id
-    article_id = Faker::Number.between(1, articles.count)
-    parent_id = Faker::Number.between(1, comments.count)
-    user.comments.create!(body: body,
-                          user_id: user_id,
-                          article_id: article_id,
-                          parent_id: parent_id)
-  end
-end
-
-1.times do
-  @user = User.find_by_id(1)
-  lorem = Faker::Lorem.paragraph(25)
-  ipsum = Faker::Lorem.paragraph(25)
-  body = "<img src='http://robohash.org/TUMRI.png?set=set2' class='center'>
-          <div>
-            <i> Write stuff about Newzer here. </i>
-            <p> #{lorem} </p>
-            <p> #{ipsum} </p>
-          </div>"
-  @user.articles.create!(title: 'Welcome to Newzer',
-                         body: body,
-                         category_id: 9,
-                         approved: true,
-                         featured: true)
-end
+# 25.times do
+#   users.each do |user|
+#     body = Faker::Hacker.say_something_smart
+#     user_id = user.id
+#     article_id = Faker::Number.between(1, articles.count)
+#     parent_id = Faker::Number.between(1, comments.count)
+#     user.comments.create!(body: body,
+#                           user_id: user_id,
+#                           article_id: article_id,
+#                           parent_id: parent_id)
+#   end
+# end

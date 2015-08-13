@@ -2,7 +2,7 @@
 
   <h1><%= yield(:page) %></h1>
   <p>
-   Have something new to share with the world? Post about it in a new article!
+   Welcome back <% current_user.name %>
   </p>
 
   <%= link_to 'New Article',
@@ -11,4 +11,8 @@
 
 </div>
 
-<div align='center'><%= link_to image_tag('ruby-on-rails-logo.png', alt: 'Rails logo'), 'http://rubyonrails.org/' %></div>
+<div>
+
+  <%= render Article.find_by_id(1) %>
+
+</div>
