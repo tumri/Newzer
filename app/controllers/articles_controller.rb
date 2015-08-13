@@ -1,14 +1,20 @@
 class ArticlesController < ApplicationController
-  before_action :logged_in_user, only: [:create,
-                                        :report]
+  before_action :logged_in_user,  only: [:reported,
+                                         :create,
+                                         :edit,
+                                         :update,
+                                         :delete,
+                                         :report,
+                                         :approve,
+                                         :feature]
 
-  before_action :correct_user,   only: [:edit,
-                                        :update,
-                                        :destroy]
+  before_action :authorized_user, only: [:edit,
+                                         :update,
+                                         :destroy]
 
-  before_action :power_user,     only: [:reported,
-                                        :approve,
-                                        :feature]
+  before_action :power_user,      only: [:reported,
+                                         :approve,
+                                         :feature]
 
   def index
     @articles = Article.paginate(page: params[:page],
@@ -138,15 +144,19 @@ class ArticlesController < ApplicationController
     end
 
     def power_user
-      store_location
-      flash[:danger] = 'Insufficient privileges.'
-      redirect_to(root_url) unless power_user?
+      unless power_user?
+        store_location
+        flash[:danger] = 'Insufficient privileges.'
+        redirect_to(root_url)
+      end
     end
 
-    def correct_user
-      storage_location
-      store_location
-      flash[:danger] = 'Insufficient privileges.'
-      redirect_to(root_url) unless power_user? || current_user == @article.user
+    def authorized_user
+      @user = Article.find(params[:id]).user
+      unless power_user? || current_user?(@user)
+        store_location
+        flash[:danger] = 'Insufficient privileges.'
+        redirect_to(root_url)
+      end
     end
 end

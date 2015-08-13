@@ -1,7 +1,13 @@
 class UsersController < ApplicationController
-  before_action :logged_in_user, only: [:index, :edit, :update, :destroy]
-  before_action :correct_user,   only: [:edit, :update]
-  before_action :admin_user,     only: [:destroy, :promote]
+  before_action :logged_in_user,  only: [:index,
+                                         :edit,
+                                         :update,
+                                         :destroy,
+                                         :promote]
+  before_action :correct_user,    only: [:edit,
+                                        :update]
+  before_action :admin_user,      only: [:destroy,
+                                         :promote]
 
   def index
     @users = User.where(activated: true).paginate(page: params[:page])
@@ -77,13 +83,19 @@ class UsersController < ApplicationController
     end
 
     def admin_user
-      store_location
-      flash[:danger] = 'Insufficient privileges.'
-      redirect_to(root_url) unless current_user.admin?
+      unless current_user.admin?
+        store_location
+        flash[:danger] = 'Insufficient privileges.'
+        redirect_to(root_url)
+      end
     end
 
     def correct_user
       @user = User.find(params[:id])
-      redirect_to(root_url) unless current_user?(@user)
+      unless current_user?(@user)
+        store_location
+        flash[:danger] = 'Insufficient privileges.'
+        redirect_to(root_url)
+      end
     end
 end

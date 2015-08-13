@@ -20,7 +20,7 @@ class CategoriesController < ApplicationController
     end
 
     def power_user
-      redirect_to(root_url) unless current_user.admin? || current_user.mod?
+      redirect_to(root_url) unless power_user?
     end
 
     def admin_user

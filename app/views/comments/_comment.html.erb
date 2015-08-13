@@ -53,7 +53,7 @@
                         class: "btn btn-xs btn-default
                                 glyphicon glyphicon-share-alt
                                 comment-reply" %>
-            <% unless comment.unflagged? %>
+            <% unless power_user? || comment.unflagged? %>
               <%= link_to '',
                           flag_comment_path,
                           method: :post,
@@ -70,9 +70,8 @@
                           class: "btn btn-xs btn-warning
                                   glyphicon glyphicon-check
                                   comment-flag" %>
-              <% end %>
             <% end %>
-            <% if power_user? || current_user = comment.user %>
+            <% if power_user? || current_user?(comment.user) %>
               <%= link_to '',
                           comment,
                           method: :delete,
