@@ -5,7 +5,7 @@ class Comment < ActiveRecord::Base
 
   # attr_accessible :body, :article_id, :user_id
 
-  has_closure_tree order: 'created_at DESC', with_advisory_lock: true
+  has_closure_tree order: 'created_at DESC', with_advisory_lock: false
 
   # default_scope -> { order(created_at: :desc) }
 
