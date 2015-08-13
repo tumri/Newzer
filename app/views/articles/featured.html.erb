@@ -1,4 +1,14 @@
+<% provide(:title, "Featured Articles") %>
+
 <div><h2>Featured Articles</h2><div>
+
+<div>
+<%= link_to 'New Article',
+            new_article_path,
+            class: 'new-article-button btn btn-block btn-primary' %>
+</div>
+
+<hr>
 
 <%= will_paginate @articles %>
 

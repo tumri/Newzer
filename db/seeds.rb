@@ -22,61 +22,61 @@ User.create!(name:                               'Tumri',
              activated:                             true,
              activated_at:                 Time.zone.now)
 
-User.create!(name:                    'Siddhu',
-             email:  'sixarmedfreak@gmail.com',
-             password:                'tester',
-             password_confirmation:   'tester',
-             admin:                      false,
-             mod:                         true,
-             activated:                   true,
-             activated_at:       Time.zone.now)
+User.create!(name:                              'Siddhu',
+             email:            'sixarmedfreak@gmail.com',
+             password:                          'tester',
+             password_confirmation:             'tester',
+             admin:                                false,
+             mod:                                   true,
+             activated:                             true,
+             activated_at:                 Time.zone.now)
 
-User.create!(name:                    'Nicole',
-             email:    'nickchance1@gmail.com',
-             password:                'tester',
-             password_confirmation:   'tester',
-             admin:                      false,
-             mod:                         true,
-             activated:                   true,
-             activated_at:       Time.zone.now)
+User.create!(name:                              'Nicole',
+             email:           'nickcummings11@gmail.com',
+             password:                          'tester',
+             password_confirmation:             'tester',
+             admin:                                false,
+             mod:                                   true,
+             activated:                             true,
+             activated_at:                 Time.zone.now)
 
-User.create!(name:             'Administrator',
-             email:  'administrator@tumri.xyz',
-             password:                'tester',
-             password_confirmation:   'tester',
-             admin:                       true,
-             mod:                         true,
-             activated:                   true,
-             activated_at:       Time.zone.now)
+User.create!(name:                       'Administrator',
+             email:                    'admin@tumri.xyz',
+             password:              "#{ENV['PASSWORD']}",
+             password_confirmation: "#{ENV['PASSWORD']}",
+             admin:                                 true,
+             mod:                                   true,
+             activated:                             true,
+             activated_at:                 Time.zone.now)
 
-User.create!(name:                 'Moderator',
-             email:      'moderator@tumri.xyz',
-             password:                'tester',
-             password_confirmation:   'tester',
-             admin:                      false,
-             mod:                         true,
-             activated:                   true,
-             activated_at:       Time.zone.now)
+User.create!(name:                           'Moderator',
+             email:                      'mod@tumri.xyz',
+             password:              "#{ENV['PASSWORD']}",
+             password_confirmation: "#{ENV['PASSWORD']}",
+             admin:                                false,
+             mod:                                   true,
+             activated:                             true,
+             activated_at:                 Time.zone.now)
 
-User.create!(name:                      'User',
-             email:           'user@tumri.xyz',
-             password:                'tester',
-             password_confirmation:   'tester',
-             admin:                      false,
-             mod:                        false,
-             activated:                   true,
-             activated_at:       Time.zone.now)
+User.create!(name:                                'User',
+             email:                     'user@tumri.xyz',
+             password:              "#{ENV['PASSWORD']}",
+             password_confirmation: "#{ENV['PASSWORD']}",
+             admin:                                false,
+             mod:                                  false,
+             activated:                             true,
+             activated_at:                 Time.zone.now)
 
 30.times do |n|
   name  = Faker::Name.name
   email = "tester-#{n + 1}@tumri.xyz"
   password = 'password'
-  User.create!(name:                      name,
-               email:                    email,
-               password:              password,
-               password_confirmation: password,
-               activated:                 true,
-               activated_at:     Time.zone.now)
+  User.create!(name:                                name,
+               email:                              email,
+               password:                        password,
+               password_confirmation:           password,
+               activated:                           true,
+               activated_at:               Time.zone.now)
 end
 
 # Article Seeds
@@ -155,5 +155,6 @@ end
   @user.articles.create!(title: 'Welcome to Newzer',
                          body: body,
                          category_id: 9,
-                         approved: true)
+                         approved: true,
+                         featured: true)
 end

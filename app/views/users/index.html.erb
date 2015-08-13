@@ -2,17 +2,17 @@
 <h1>All users</h1>
 
 <div class='col-md-12'>
-<%= will_paginate %>
+  <%= will_paginate %>
 </div>
 
 <ul class='users'>
   <% @users.each do |user| %>
-  <div class='col-md-4'>
+    <div class='col-md-4'>
       <%= render user %>
-      </div>
+    </div>
   <% end %>
 </ul>
 
 <div class='col-md-12'>
-<%= will_paginate %>
+  <%= will_paginate %>
 </div>

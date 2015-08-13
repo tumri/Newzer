@@ -31,6 +31,18 @@
                       approved_path %>
         </li>
 
+        <% if logged_in? && (current_user.admin? || current_user.mod?) %>
+          <li>
+            <%= link_to 'Reported',
+                        reported_path %>
+          </li>
+
+          <li>
+            <%= link_to 'Flagged',
+                        flagged_path %>
+          </li>
+        <% end %>
+
         <li>
           <%= link_to 'Feed',
                       articles_path %>

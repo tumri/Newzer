@@ -6,12 +6,10 @@
         <%= gravatar_for @user %>
         <% if @user.admin? %>
           <div class='user-name admin-user';><%= @user.name %></div>
+        <% elsif @user.mod? %>
+          <div class='user-name mod-user';><%= @user.name %></div>
         <% else %>
-          <% if @user.mod? %>
-            <div class='user-name mod-user';><%= @user.name %></div>
-          <% else %>
-            <div class='user-name'><%= @user.name %></div>
-          <% end %>
+          <div class='user-name'><%= @user.name %></div>
         <% end %>
       </h1>
       <div>

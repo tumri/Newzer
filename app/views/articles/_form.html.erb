@@ -1,6 +1,7 @@
-<%= render 'article_error_messages' %>
 <span class=<%= "data-no-turbolinks='true'".html_safe %>>
 <%= bootstrap_form_for @article do |f| %>
+
+  <%= render 'shared/error_messages', object: f.object %>
 
   <div>
     <%= f.text_field :title %>

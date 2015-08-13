@@ -1,5 +1,9 @@
-<% if article.featured?%>
+<% if article.featured? %>
   <div class='panel panel-primary'>
+<% elsif article.approved? %>
+  <div class='panel panel-info'>
+<% elsif article.reported? && logged_in? && power_user? %>
+  <div class='panel panel-warning'>
 <% else %>
   <div class='panel panel-default'>
 <% end %>
@@ -11,16 +15,25 @@
       <%= link_to article.title.html_safe,
                   article %>
 
-      <% if article.featured?%>
-        <%= link_to article.category.name,
-                    article.category,
-                    class: 'label label-danger
-                            article-tag
-                            clear' %>
+      <% if article.featured? %>
+        <span class='label label-danger article-tag clear'>
+          <%= link_to article.category.name,
+                      article.category %>
+        </span>
+      <% elsif article.approved? %>
+        <span class='label label-success article-tag clear'>
+          <%= link_to article.category.name,
+                      article.category %>
+        </span>
+      <% elsif article.reported? && logged_in? && power_user? %>
+        <span class='label label-info article-tag clear'>
+          <%= link_to article.category.name,
+                      article.category %>
+        </span>
       <% else %>
-        <span class='label label-default clear article-tag'>
-        <%= link_to article.category.name,
-                    article.category %>
+        <span class='label label-default article-tag clear'>
+          <%= link_to article.category.name,
+                      article.category %>
         </span>
       <% end %>
 
@@ -59,19 +72,20 @@
       <li>Updated: <%= article.updated_at %></li>
     </span>
 
-    <% if logged_in? && (current_user.admin? || current_user.mod? || current_user?(article.user)) %>
+    <% if logged_in? %>
 
       <div class='article-buttons'>
 
-        <% if article.approved? && !current_user.admin? && !current_user.mod? %>
-          <span class='glyphicon glyphicon-eye-open btn-sm'></span>
+        <% unless article.approved? || current_user = article.user %>
+          <%= link_to '',
+                      report_article_path(article),
+                      method: :post,
+                      data: { confirm: 'Report this article?'},
+                      class: 'btn btn-sm btn-warning
+                              glyphicon glyphicon-warning-sign' %>
         <% end %>
 
-        <% if article.featured? && !current_user.admin? && !current_user.mod? %>
-          <span class='glyphicon glyphicon-star btn-sm'></span>
-        <% end %>
-
-        <% if current_user.admin? || current_user.mod? %>
+        <% if power_user? %>
           <% if article.approved? %>
             <%= link_to '',
                         approve_article_path(article),
@@ -79,17 +93,17 @@
                         data: { confirm: 'Unapprove this article?'},
                         class: 'btn btn-sm btn-primary
                                 glyphicon glyphicon-eye-open' %>
-            <% else %>
+          <% else %>
             <%= link_to '',
                         approve_article_path(article),
                         method: :post,
                         data: { confirm: 'Approve this article?'},
                         class: 'btn btn-sm btn-default
                                 glyphicon glyphicon-eye-close' %>
-            <% end %>
+          <% end %>
         <% end %>
 
-        <% if current_user.admin? || current_user.mod? %>
+        <% if power_user? %>
           <% if article.featured? %>
             <%= link_to '',
                         feature_article_path(article),
@@ -97,27 +111,30 @@
                         data: { confirm: 'Unfeature this article?'},
                         class: 'btn btn-sm btn-primary
                                 glyphicon glyphicon-star' %>
-            <% else %>
+          <% else %>
             <%= link_to '',
                         feature_article_path(article),
                         method: :post,
                         data: { confirm: 'Feature this article?'},
                         class: 'btn btn-sm btn-default
                                 glyphicon glyphicon-star-empty' %>
-            <% end %>
+          <% end %>
         <% end %>
 
-        <%= link_to '',
-                    edit_article_path(article),
-                    class: 'btn btn-sm btn-warning
-                            glyphicon glyphicon-pencil' %>
+        <% if power_user? || current_user?(article.user) %>
+          <%= link_to '',
+                      edit_article_path(article),
+                      class: 'btn btn-sm btn-warning
+                              glyphicon glyphicon-pencil' %>
 
-        <%= link_to '',
-                     article,
-                     method: :delete,
-                     data: { confirm: 'Delete this article?' },
-                     class: 'btn btn-sm btn-danger
-                             glyphicon glyphicon-remove'%>
+          <%= link_to '',
+                       article,
+                       method: :delete,
+                       data: { confirm: 'Delete this article?' },
+                       class: 'btn btn-sm btn-danger
+                               glyphicon glyphicon-trash'%>
+        <% end %>
+
       </div>
 
     <% end %>

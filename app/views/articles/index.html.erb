@@ -1,10 +1,12 @@
+<div><h2>Article Feed</h2><div>
+
 <div>
 <%= link_to 'New Article',
             new_article_path,
             class: 'new-article-button btn btn-block btn-primary' %>
 </div>
 
-<br>
+<hr>
 
 <%= will_paginate @articles %>
 

@@ -2,10 +2,12 @@
 
   <h1><%= yield(:page) %></h1>
   <p>
-   Welcome to Newzer!
+   Have something new to share with the world? Post about it in a new article!
   </p>
 
-  <%= link_to 'Register', signup_path, class: 'btn btn-lg btn-primary' %>
+  <%= link_to 'New Article',
+              new_article_path,
+              class: 'btn btn-lg btn-primary' %>
 
 </div>
 

@@ -1,32 +1,44 @@
-# Newzer
+**Newzer**
 -----
 
-A personal project to try out CKEditor and create a basic user generated news article site.
+------
+
+*A personal project to create a user generated news article application using Ruby on Rails.*
+-----
+
+------
+
+***TODO:***
+
+* Create an appealing home page for logged in users. Improve the contact, help, and about pages.
+
+* Each user/author should have a profile where their previous articles and comments are be displayed.
+
+* In the future a voting system should be implemented so that "Featured" articles are automatically flagged as such after reaching a certain popularity threshold.
+
+* Testing is currently underwhelming. Tests must be created for article and comment create/edit/delete. Tests must also be created for file uploads/deletions with S3. User tests must be expanded to include moderators.
+
+>* *Newzer 2.0: Reimplement the frontend using Ember to cut down on page loads and provide a better UX.*
 
 -----
 
-TODO:
+***Done:***
 
-Comment replies to other comments currently require a redirect. An AJAX rendering of the comment form would be beneficial.
 
-Each user/author will have a profile where they can highlight their credentials and advertise their social media profiles. This information will also be shown in minified form on the user/author's articles.
+* The login/logout/validation system is a basic implementation but could be replaced by Devise or similar. Users are divided into admins, mods, and basic users. Admins have all power user privileges, mods have all power user privileges but cannot delete other users, and basic users only have basic privileges.
 
------
+* User avatars are handled through Gravatar but may be replaced with a private avatar system in the future.
 
-Done:
+* Each user has the ability to post fully formatted articles using CKEditor. Images/attachments may be direct linked from an outside host such as Imgur or uploaded directly to internal file storage from the CKEditor article form page.
 
-The login/logout/validation system is a basic implementation but could be replaced by Devise or similar.
+* Images/attachments are stored in Amazon S3. File storage is handled by CarrierWave and Fog. Each user's uploads are private and are not available to outside users. If a user is deleted then their attachments/images are deleted from S3 as well.
 
-User avatars are handled through Gravatar but may be replaced with a private avatar system in the future.
+* Admins/Mods are able to approve articles to be shown on the approved page. An admin/mod is able to feature articles to appear on the featured page. Featured articles that are not also approved do not appear in the featured page. Essentially an article's visibility outside the "Feed" page is determined by it's approval status.* Admins/Mods are able to delete articles, and comments. They are also able to silently edit an article without altering the user the article is associated with.
 
-Each user has the ability to post fully formatted articles using CKEditor. Images/attachments may be direct linked from an outside host such as Imgur or uploaded directly to internal file storage from the CKEditor article form page.
+* Each article is tagged under a category. Users are able to go to a category page, select a category, and view articles from that category.
 
-Images/attachments are stored in Amazon S3. File storage is handled by CarrierWave and Fog. Each user's uploads are private and are not available to outside users. If a user is deleted then their attachments/images are deleted from S3 as well.
+* Users are able to leave comments on articles. Comments may also be replied to in a nested hierarchical fashion(implemented using closure_tree). If a root comment is deleted then the replies to that root comment become root comments themselves. A context button is provided so that each comment's parent comment or parent article may be easily found.
 
-Admins are able to approve articles to be shown on the approved page. An admin is able to feature articles to appear on the featured page. Featured articles that are not also approved do not appear in the featured page. Essentially an article's visibility outside the "Feed" page is determined by it's approval status.
+* Comment replies employ AJAX to allow users to reply to comments without a redirect.
 
-Admins are able to delete users, articles, and comments. They are also able to silently edit an article without altering the user the article is associated with.
-
-Each article is tagged under a category. Users are able to go to a category page, select a category, and view articles from that category.
-
-Users are able to leave comments on articles. Comments may also be replied to in a nested hierarchical fashion(implemented using closure_tree). If a root comment is deleted then the replies to that root comment become root comments themselves. A context button is provided so that each comment's parent comment or parent article may be easily found.
+* Articles are be able to be reported for inappropriate content before they are approved. Admins/Mods are then see these reported articles in a sepearate reported article feed. Comments are also be able to be reported for inappropriate content and put into a separate reported comment feed for Admins/Mods.

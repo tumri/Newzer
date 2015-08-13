@@ -3,8 +3,13 @@
 
 /* admin color */
 
+$admin-color: #D9534F;
+$mod-color: #5CB85C;
+$admin-hover: darken($admin-color, 15%);
+$mod-hover: darken($mod-color, 15%);
+
 .admin-user{
-  color: #D9534F;
+  color: $admin-color;
   font-weight: 900;
 }
 
@@ -13,6 +18,13 @@
   font-weight: 700;
 }
 
+a.admin-userr:hover {
+  color: $admin-hover !important;
+}
+
+a.mod-user:hover {
+  color: $mod-hover !important;
+}
 
 /* Base 16 Colors */
 
@@ -72,6 +84,14 @@ $brand-default: #222222;
   @include box_sizing;
 }
 
+.pagination {
+  overflow: hidden;
+}
+
+.panel-title {
+  text-decoration: none !important;
+}
+
 /* universal */
 
 html {
@@ -125,9 +145,16 @@ img.center {
   clear: both;
 }
 
-.wrap{
+.overflow {
   overflow: hidden;
+}
+
+.wrap {
   word-wrap: break-word;
+}
+
+.text-undecorate {
+  text-decoration: none !important;
 }
 
 /* callouts */
@@ -335,6 +362,10 @@ aside {
 
 /* users */
 
+.user a {
+  text-decoration: none !important;
+}
+
 .users {
   list-style: none;
   margin: 0;
@@ -441,11 +472,21 @@ aside {
 }
 
 .article-tag {
+  padding: .3em .6em .3em;
   display: inline-block;
   float: right;
   a {
+    text-decoration: none;
     color: white;
   }
+}
+
+.article-title {
+}
+
+.article-title-callout {
+  padding-left: 1em;
+  padding-right: 1em;
 }
 
 .article-time {
@@ -455,13 +496,6 @@ aside {
     list-style: none;
   }
 }
-
-.article-title {
-  padding-left: 1em;
-  padding-right: 1em;
-}
-
-
 
 /* Comments */
 

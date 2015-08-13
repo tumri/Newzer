@@ -1,21 +1,25 @@
 <%= bootstrap_form_for(@comment) do |f| %>
 
-<div class='col-md-8'>
-<%= f.text_area :body,
-                :maxlength => 500,
-                rows: 3,
-                hide_label: true,
-                class: ""%>
-</div>
+  <%= render 'shared/error_messages', object: f.object %>
+  <%# Error messages partial currently doesn't raise comment errors. The controller is being used for that at the moment. %>
 
-<div class='col-md'>
-<%= f.button '',
-             type: 'submit',
-             title: 'Submit'
-             class: "btn btn-sm btn-success
-                     glyphicon glyphicon-comment" %>
-</div>
+  <div class='col-md-8'>
+    <%= f.text_area :body,
+                    :minlength => 10,
+                    :maxlength => 500,
+                    rows: 3,
+                    hide_label: true,
+                    class: ""%>
+  </div>
 
-<%= f.hidden_field :parent_id %>
+  <div class='col-md'>
+    <%= f.button '',
+                 type: 'submit',
+                 title: 'Submit',
+                 class: "btn btn-sm btn-success
+                         glyphicon glyphicon-comment" %>
+  </div>
+
+  <%= f.hidden_field :parent_id %>
 
 <% end %>

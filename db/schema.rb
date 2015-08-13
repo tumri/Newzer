@@ -11,17 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150809065126) do
+ActiveRecord::Schema.define(version: 20150810073822) do
 
   create_table "articles", force: :cascade do |t|
     t.string   "title"
     t.text     "body"
-    t.integer  "category_id"
     t.integer  "user_id"
     t.datetime "created_at",                  null: false
     t.datetime "updated_at",                  null: false
+    t.integer  "category_id"
     t.boolean  "approved",    default: false
     t.boolean  "featured",    default: false
+    t.boolean  "reported",    default: false
   end
 
   add_index "articles", ["category_id", "created_at"], name: "index_articles_on_category_id_and_created_at"
@@ -64,9 +65,11 @@ ActiveRecord::Schema.define(version: 20150809065126) do
     t.string   "body"
     t.integer  "user_id"
     t.integer  "article_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
     t.integer  "parent_id"
+    t.boolean  "flagged",    default: false
+    t.boolean  "unflagged",  default: false
   end
 
   add_index "comments", ["article_id", "created_at"], name: "index_comments_on_article_id_and_created_at"

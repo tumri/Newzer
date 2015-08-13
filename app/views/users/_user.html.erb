@@ -2,13 +2,22 @@
   <%= gravatar_for user, size: 50 %>
 
   <% if user.admin? %>
-    <%= link_to user.name, user, class: 'admin-user' %>
+    <%= link_to user.name,
+                user,
+                class: 'admin-user' %>
+  <% elsif user.mod? %>
+    <%= link_to user.name,
+                user,
+                class: 'mod-user' %>
   <% else %>
-    <%= link_to user.name, user %>
+    <%= link_to user.name,
+                user %>
   <% end %>
 
   <% if current_user.admin? && !current_user?(user) && !user.admin? %>
-    | <%= link_to 'delete', user, method: :delete,
-                                  data: { confirm: 'You sure?' } %>
+    | <%= link_to 'delete',
+                  user,
+                  method: :delete,
+                  data: { confirm: 'Delete User?' } %>
   <% end %>
 </li>

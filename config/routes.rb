@@ -27,9 +27,17 @@ Rails.application.routes.draw do
 
   get       'articles'                 => 'articles#index'
 
+  get       'reported'                 => 'articles#reported'
+
   get       'approved'                 => 'articles#approved'
 
   get       'featured'                 => 'articles#featured'
+
+  get       'flagged'                 => 'comments#flagged'
+
+  get       '/comments/new/(:parent_id)',
+            to: 'comments#new',
+            as: :new_comment
 
   get       'categories'               => 'categories#index'
 
@@ -45,18 +53,21 @@ Rails.application.routes.draw do
 
   resources :articles do
     resources :comments, shallow: true
+    member { post :report }
     member { post :approve }
     member { post :feature }
   end
-
+  post      'report_article'           => 'articles#report'
   post      'approve_article'          => 'articles#approve'
   post      'feature_article'          => 'articles#feature'
 
-  resources :comments,            only: [:index, :delete, :create]
+  resources :comments do
+    member { post :flag }
+    member { post :unflag }
+  end
 
-  get '/comments/new/(:parent_id)',
-      to: 'comments#new',
-      as: :new_comment
+  post      'flag_comment'             => 'comments#flag'
+  post      'unflag_comment'           => 'comments#unflag'
 
   resources :categories,          only: [:index, :show]
 end
