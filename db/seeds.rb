@@ -127,20 +127,20 @@ articles = Article.order(:id)
 end
 
 # Comment Reply Seeds [Warning: Causes issues when seeding to SQLite DB.]
-# comments = Comment.order(:id)
+comments = Comment.order(:id)
 
-# 25.times do
-#   users.each do |user|
-#     body = Faker::Hacker.say_something_smart
-#     user_id = user.id
-#     article_id = Faker::Number.between(1, articles.count)
-#     parent_id = Faker::Number.between(1, comments.count)
-#     user.comments.create!(body: body,
-#                           user_id: user_id,
-#                           article_id: article_id,
-#                           parent_id: parent_id)
-#   end
-# end
+25.times do
+  users.each do |user|
+    body = Faker::Hacker.say_something_smart
+    user_id = user.id
+    article_id = Faker::Number.between(1, articles.count)
+    parent_id = Faker::Number.between(1, comments.count)
+    user.comments.create!(body: body,
+                          user_id: user_id,
+                          article_id: article_id,
+                          parent_id: parent_id)
+  end
+end
 
 1.times do
   @user = User.find_by_id(1)
