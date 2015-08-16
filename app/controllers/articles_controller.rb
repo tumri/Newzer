@@ -85,10 +85,10 @@ class ArticlesController < ApplicationController
   def report
     @article = Article.find(params[:id])
     if @article.approved?
-      flash[:danger] = 'Article is approved and cannot be reported.'
+      flash[:danger] = 'This article is approved and cannot be reported.'
       redirect_to request.referrer || articles_path
     elsif @article.reported?
-      flash[:warning] = 'Article is already reported.'
+      flash[:warning] = 'Article reported.'
       redirect_to request.referrer || articles_path
     else
       @article.update_column(:reported, true)
@@ -96,7 +96,7 @@ class ArticlesController < ApplicationController
         flash[:warning] = 'Article reported.'
         redirect_to request.referrer || articles_path
       else
-        flash[:danger] = '[Error] Article was not reported. Try again.'
+        flash[:danger] = '[Error] Article was not reported. Please try again.'
         redirect_to request.referrer || articles_path
       end
     end

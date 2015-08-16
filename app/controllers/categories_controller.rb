@@ -1,12 +1,14 @@
 class CategoriesController < ApplicationController
-
   def index
     @categories = Category.order('created_at ASC')
   end
 
   def show
     @category = Category.find(params[:id])
-    @articles = Article.where(category_id: @category.id)
+    @articles = Article.paginate(page: params[:page],
+                                 per_page: 10
+                                ).where(category_id: @category.id
+                                       ).order('created_at DESC')
   end
 
   private

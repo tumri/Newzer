@@ -1,3 +1,17 @@
-<div><h2><% @category.name.html_safe %></h2><div>
+<% provide(:title, "#{@category.name}") %>
+
+<div><h2><%= @category.name %> Feed</h2><div>
+
+<div>
+<%= link_to 'New Article',
+            new_article_path,
+            class: 'new-article-button btn btn-block btn-primary' %>
+</div>
+
+<hr>
+
+<%= will_paginate @articles %>
 
 <%= render @articles %>
+
+<%= will_paginate @articles %>

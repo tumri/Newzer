@@ -18,22 +18,26 @@
       <% if article.featured? %>
         <span class='label label-danger article-tag clear'>
           <%= link_to article.category.name,
-                      article.category %>
+                      article.category,
+                      title: "#{article.category.name}" %>
         </span>
       <% elsif article.approved? %>
         <span class='label label-success article-tag clear'>
           <%= link_to article.category.name,
-                      article.category %>
+                      article.category,
+                      title: "#{article.category.name}" %>
         </span>
       <% elsif article.reported? && logged_in? && power_user? %>
         <span class='label label-info article-tag clear'>
           <%= link_to article.category.name,
-                      article.category %>
+                      article.category,
+                      title: "#{article.category.name}" %>
         </span>
       <% else %>
         <span class='label label-default article-tag clear'>
           <%= link_to article.category.name,
-                      article.category %>
+                      article.category,
+                      title: "#{article.category.name}" %>
         </span>
       <% end %>
 
@@ -84,7 +88,8 @@
           <%= link_to '',
                       report_article_path(article),
                       method: :post,
-                      data: { confirm: 'Report this article?'},
+                      title: 'Report',
+                      data: { confirm: 'Are you sure you want to report this article for inappropriate content?'},
                       class: 'btn btn-sm btn-warning
                               glyphicon glyphicon-warning-sign' %>
         <% end %>
@@ -94,14 +99,16 @@
             <%= link_to '',
                         approve_article_path(article),
                         method: :post,
-                        data: { confirm: 'Unapprove this article?'},
+                        title: 'Unapprove',
+                        data: { confirm: 'Are you sure you want to unapprove this article?'},
                         class: 'btn btn-sm btn-primary
                                 glyphicon glyphicon-eye-open' %>
           <% else %>
             <%= link_to '',
                         approve_article_path(article),
                         method: :post,
-                        data: { confirm: 'Approve this article?'},
+                        title: 'Approve',
+                        data: { confirm: 'Are you sure you want to approve this article?'},
                         class: 'btn btn-sm btn-default
                                 glyphicon glyphicon-eye-close' %>
           <% end %>
@@ -112,14 +119,16 @@
             <%= link_to '',
                         feature_article_path(article),
                         method: :post,
-                        data: { confirm: 'Unfeature this article?'},
+                        title: 'Unfeature',
+                        data: { confirm: 'Are you sure you want to unfeature this article?'},
                         class: 'btn btn-sm btn-primary
                                 glyphicon glyphicon-star' %>
           <% else %>
             <%= link_to '',
                         feature_article_path(article),
                         method: :post,
-                        data: { confirm: 'Feature this article?'},
+                        title: 'Feature',
+                        data: { confirm: 'Are you sure you want to feature this article?'},
                         class: 'btn btn-sm btn-default
                                 glyphicon glyphicon-star-empty' %>
           <% end %>
@@ -128,13 +137,15 @@
         <% if power_user? || current_user?(article.user) %>
           <%= link_to '',
                       edit_article_path(article),
+                      title: 'Edit',
                       class: 'btn btn-sm btn-warning
                               glyphicon glyphicon-pencil' %>
 
           <%= link_to '',
                        article,
                        method: :delete,
-                       data: { confirm: 'Delete this article?' },
+                       title: 'Delete',
+                       data: { confirm: 'Are you sure you want to delete this article?' },
                        class: 'btn btn-sm btn-danger
                                glyphicon glyphicon-trash'%>
         <% end %>
