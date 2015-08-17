@@ -1,6 +1,12 @@
 <div class='row anchor' id="comment_<%= comment.id %>">
   <div class='col-md-6'>
-    <div class='panel panel-default clear wrap overflow'>
+    <% if comment.flagged? && logged_in? && power_user? %>
+      <div class='panel panel-warning clear wrap overflow'>
+    <% elsif comment.unflagged? && logged_in? && power_user? %>
+      <div class='panel panel-info clear wrap overflow'>
+    <% else %>
+      <div class='panel panel-default clear wrap overflow'>
+    <% end %>
 
       <div class='panel-heading'>
 

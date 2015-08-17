@@ -12,13 +12,7 @@
 
 * Create an appealing home page for logged in users. Improve the contact, help, and about pages.
 
-* Each user/author should have a profile where their previous articles and comments are be displayed.
-
-* In the future a voting system should be implemented so that "Featured" articles are automatically flagged as such after reaching a certain popularity threshold.
-
 * Testing is currently underwhelming. Tests must be created for article and comment create/edit/delete. Tests must also be created for file uploads/deletions with S3. User tests must be expanded to include moderators.
-
->* *Newzer 2.0: Reimplement the frontend using Ember to cut down on page loads and provide a better UX.*
 
 -----
 
@@ -26,6 +20,10 @@
 
 
 * The login/logout/validation system is a basic implementation but could be replaced by Devise or similar. Users are divided into admins, mods, and basic users. Admins have all power user privileges, mods have all power user privileges but cannot delete other users, and basic users only have basic privileges.
+
+* Each user has a profile where their previous articles and comments are be displayed.
+
+* Admins can promote users to mods or demote mods to users through the user profile page.
 
 * User avatars are handled through Gravatar but may be replaced with a private avatar system in the future.
 
@@ -39,6 +37,22 @@
 
 * Users are able to leave comments on articles. Comments may also be replied to in a nested hierarchical fashion(implemented using closure_tree). If a root comment is deleted then the replies to that root comment become root comments themselves. A context button is provided so that each comment's parent comment or parent article may be easily found.
 
-* Comment replies employ AJAX to allow users to reply to comments without a redirect.
+* Comment replies use AJAX to allow users to reply to comments without a redirect or reload.
 
 * Articles are be able to be reported for inappropriate content before they are approved. Admins/Mods are then see these reported articles in a sepearate reported article feed. Comments are also be able to be reported for inappropriate content and put into a separate reported comment feed for Admins/Mods.
+
+-----
+
+***Future Plans(2.0):***
+
+* The frontend should be reimplemented using Ember to cut down on page loads and provide a better UX.
+
+* A voting system should be implemented so that "Featured" articles are automatically flagged as such after reaching a certain popularity threshold.
+
+* An automated temporary moderation system should be implemented so that heavily reported/flagged articles/comments are automatically toggled "hidden" until an Admin/Mod is able to manually inspect the offending material.
+
+* A bookmarking and favoriting system should be implemented with notification options for users to be alerted when their favorited writers post a new article or when an older article is updated.
+
+* A user reengagement system should be implemented using points or intangible rewards such as badges to encourage users to repeatedly visit and engage in the site's content without any sort of email notification spam prodding them to do so.
+
+* Writers with a certain popularity threshold should be given a small discussion board of sorts for their fans to mingle and discuss topics that the writer focuses on. Suggestions for future articles could also be posted and voted on in this discussion board.

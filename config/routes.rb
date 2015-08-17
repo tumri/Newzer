@@ -47,9 +47,11 @@ Rails.application.routes.draw do
 
   post      'promote_user'             => 'users#promote'
 
-  resources :account_activations, only: [:edit]
+  resources :account_activations,
+            only: [:edit]
 
-  resources :password_resets,     only: [:new, :create, :edit, :update]
+  resources :password_resets,
+            only: [:new, :create, :edit, :update]
 
   resources :articles do
     resources :comments, shallow: true
@@ -57,6 +59,7 @@ Rails.application.routes.draw do
     member { post :approve }
     member { post :feature }
   end
+
   post      'report_article'           => 'articles#report'
   post      'approve_article'          => 'articles#approve'
   post      'feature_article'          => 'articles#feature'
@@ -69,5 +72,6 @@ Rails.application.routes.draw do
   post      'flag_comment'             => 'comments#flag'
   post      'unflag_comment'           => 'comments#unflag'
 
-  resources :categories,          only: [:index, :show]
+  resources :categories,
+            only: [:index, :show]
 end

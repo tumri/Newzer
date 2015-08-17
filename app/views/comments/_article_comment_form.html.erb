@@ -1,6 +1,7 @@
 <%= bootstrap_form_for([@article, @article.comments.build]) do |f| %>
 
-  <%= render 'shared/error_messages', object: f.object %>
+  <%# render 'shared/error_messages', object: f.object %>
+  <%# Comment error messages are currently being handled by the controller. %>
 
   <div class='col-md-8'>
     <%= f.text_area :body,

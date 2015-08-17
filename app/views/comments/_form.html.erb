@@ -1,7 +1,7 @@
 <%= bootstrap_form_for(@comment, remote: true) do |f| %>
 
-  <%= render 'shared/error_messages', object: f.object %>
-  <%# Error messages partial currently doesn't raise comment errors. The controller is being used for that at the moment. %>
+  <%# render 'shared/error_messages', object: f.object %>
+  <%# Comment error messages are currently being handled by the controller. %>
 
   <div class='col-md-8'>
     <%= f.text_area :body,

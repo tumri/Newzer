@@ -1,6 +1,6 @@
 <% provide(:title, @user.name) %>
 <div class='row'>
-  <aside class='col-md-4'>
+  <aside class='col-md-3'>
     <section class='user_info'>
       <h1>
         <%= gravatar_for @user %>
@@ -12,7 +12,14 @@
           <div class='user-name'><%= @user.name %></div>
         <% end %>
       </h1>
-      <div>
+      <p class='user-time'>
+        <span title=<%= @user.created_at.localtime.asctime.split.join('-') %>>
+          User for <%= distance_of_time_in_words_to_now(@user.created_at) %>
+        </span>
+      </p>
+
+    </section>
+      <div class='user-buttons'>
         <% if current_user.admin? && !@user.admin?  %>
           <% if @user.mod? %>
             <%= link_to '',
@@ -29,10 +36,27 @@
                         data: { confirm: 'Promote this User to Moderator?'},
                         class: 'btn btn-sm btn-default
                                 glyphicon glyphicon-user
-                                user-promote clear' %>
+                                user-button clear' %>
           <% end %>
+          <%= link_to '',
+                      @user,
+                      method: :delete,
+                      data: { confirm: 'Are you sure you want to delete this user?'},
+                      class: 'btn btn-sm btn-danger
+                              glyphicon glyphicon-remove
+                              user-button clear' %>
+
         <% end %>
       </div>
-    </section>
   </aside>
+  <div class='col-md-9'>
+    <div class='user-articles col-md-8'>
+      <%= render @user.articles %>
+    </div>
+    <div class='user-comments col-md-4'>
+      <%= render :partial => 'comments/user_comment',
+                 :collection => @user.comments.reverse,
+                 :as => :comment %>
+    </div>
+  </div>
 </div>
