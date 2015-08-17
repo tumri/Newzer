@@ -164,7 +164,7 @@
 
 
 
-  <div id='comment-form-fix'>
+  <div id='comment-form-fix' data-no-turbolink>
   </div>
 
   <div class='comment-container'>
@@ -173,7 +173,7 @@
 
   <% if logged_in? %>
 
-  <div id='comment-form' class='row'>
+  <div id='comment-form' class='row' data-no-turbolink>
     <%= render 'comments/article_comment_form' %>
   </div>
 

@@ -37,7 +37,7 @@ class CommentsController < ApplicationController
       @comment.article_id = parent.article_id
 
       if @comment.save
-        flash[:success] = 'Reply added.'
+        # flash[:success] = 'Reply added.'
 
         respond_to do |format|
           format.html { redirect_to article_path(@comment.article) }

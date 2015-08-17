@@ -1,4 +1,4 @@
-<li>
+<li class='panel panel-default user-panel'>
   <%= gravatar_for user, size: 50 %>
 
   <% if user.admin? %>
@@ -20,4 +20,11 @@
                   method: :delete,
                   data: { confirm: 'Are you sure you want to delete this user?' } %>
   <% end %>
+  <div>
+    <p class='user-time'>
+        <span title=<%= user.created_at.localtime.asctime.split.join('-') %>>
+          Joined <%= distance_of_time_in_words_to_now(user.created_at) %> ago.
+        </span>
+      </p>
+  </div>
 </li>

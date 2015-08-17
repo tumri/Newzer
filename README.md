@@ -1,16 +1,17 @@
 **Newzer**
 -----
 
-------
-
-*A personal project to create a user generated news article application using Ruby on Rails.*
------
+***A personal project to create a user generated news article application using Ruby on Rails.***
 
 ------
 
 ***TODO:***
 
-* Create an appealing home page for logged in users. Improve the contact, help, and about pages.
+* Optimize everything for Turbolinks and clean up any resulting issues.
+
+* Implement better [:flash] messages by attaching them below the static navbar instead of having them appear at the top of the page.
+
+* Create an appealing home page for logged in users. Improve the contact, help, and about pages. Replace placeholder images with relevant images in the categories page.
 
 * Testing is currently underwhelming. Tests must be created for article and comment create/edit/delete. Tests must also be created for file uploads/deletions with S3. User tests must be expanded to include moderators.
 

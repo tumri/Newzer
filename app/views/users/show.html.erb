@@ -1,6 +1,6 @@
 <% provide(:title, @user.name) %>
 <div class='row'>
-  <aside class='col-md-3'>
+  <aside class='panel panel-default col-md-3'>
     <section class='user_info'>
       <h1>
         <%= gravatar_for @user %>
@@ -14,7 +14,7 @@
       </h1>
       <p class='user-time'>
         <span title=<%= @user.created_at.localtime.asctime.split.join('-') %>>
-          User for <%= distance_of_time_in_words_to_now(@user.created_at) %>
+          Joined <%= distance_of_time_in_words_to_now(@user.created_at) %> ago.
         </span>
       </p>
 
@@ -28,7 +28,7 @@
                         data: { confirm: 'Demote this Moderator to User?'},
                         class: 'btn btn-sm btn-success
                                 glyphicon glyphicon-flash
-                                user-promote clear' %>
+                                user-button clear' %>
           <% else %>
             <%= link_to '',
                         promote_user_path(@user),

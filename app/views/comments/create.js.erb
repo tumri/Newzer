@@ -1,1 +1,5 @@
-$("#ajax_reply_<%= @comment.self_and_siblings.last.id %>").html("<%= escape_javascript(render 'comments/instant_comment') %>");
+$("#ajax_reply_<%= @comment.parent.id %>").html("<%= escape_javascript(render 'comments/instant_comment') %>");
+
+$("#reply_form_<%= @comment.parent.id %>").html("");
+
+$("#ajax_flash_<%= @comment.parent.id %>").html("<div class='alert alert-success ajax-flash'>Reply added.</div>")
