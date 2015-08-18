@@ -54,7 +54,7 @@
       <%= render @user.articles %>
     </div>
     <div class='user-comments col-md-4'>
-      <%= render :partial => 'comments/user_comment',
+      <%= render :partial => 'comments/profile_comment',
                  :collection => @user.comments.reverse,
                  :as => :comment %>
     </div>

@@ -11,7 +11,7 @@
 
 * Implement better [:flash] messages by attaching them below the static navbar instead of having them appear at the top of the page.
 
-* Create an appealing home page for logged in users. Improve the contact, help, and about pages. Replace placeholder images with relevant images in the categories page.
+* Improve the contact, help, and about pages. Replace placeholder images with relevant images in the categories page.
 
 * Testing is currently underwhelming. Tests must be created for article and comment create/edit/delete. Tests must also be created for file uploads/deletions with S3. User tests must be expanded to include moderators.
 
@@ -23,6 +23,8 @@
 * The login/logout/validation system is a basic implementation but could be replaced by Devise or similar. Users are divided into admins, mods, and basic users. Admins have all power user privileges, mods have all power user privileges but cannot delete other users, and basic users only have basic privileges.
 
 * Each user has a profile where their previous articles and comments are be displayed.
+
+* Registered and logged in users have a separate dashboard-like "Home" page.
 
 * Admins can promote users to mods or demote mods to users through the user profile page.
 

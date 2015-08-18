@@ -20,7 +20,6 @@
                       @article.category,
                       title: "#{@article.category.name}" %>
         </div>
-      </h3>
     <% elsif @article.approved?%>
       <h3 class='bs-callout-info'>
         <%= @article.title.html_safe %>
@@ -29,7 +28,6 @@
                       @article.category,
                       title: "#{@article.category.name}" %>
         </div>
-      </h3>
     <% elsif @article.reported? && logged_in? && power_user? %>
       <h3 class='bs-callout-warning'>
         <%= @article.title.html_safe %>
@@ -38,7 +36,6 @@
                       @article.category,
                       title: "#{@article.category.name}" %>
         </div>
-      </h3>
     <% else %>
       <h3 class='bs-callout-default'>
         <%= @article.title.html_safe %>
@@ -47,9 +44,13 @@
                       @article.category,
                       title: "#{@article.category.name}" %>
         </div>
-      </h3>
     <% end %>
-
+        <% if @article.comments.count > 5 %>
+           <span class="glyphicon glyphicon-fire article-hot"
+                 aria-hidden="true"
+                 title= 'Hot'></span>
+        <% end %>
+      </h3>
   </div>
 
   <hr>
@@ -79,8 +80,8 @@
 
     </div>
 
-    <span class='article-time'>
-      <li>Created: <%= @article.created_at %></li>
+    <span class='article-status'>
+      <li>Posted: <%= @article.created_at %></li>
       <li>Updated: <%= @article.updated_at %></li>
     </span>
 

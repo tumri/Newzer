@@ -45,11 +45,11 @@
       <div class='panel-body'>
 
         <p class='comment-body'><%= comment.body %></p>
-        <p class='comment-time'>
-          <span title=<%= comment.updated_at.localtime.asctime.split.join('-') %>>
+        <div class='comment-status'>
+          <li title=<%= comment.updated_at.localtime.asctime.split.join('-') %>>
             <%= distance_of_time_in_words_to_now(comment.updated_at) %> ago
-          </span>
-        </p>
+          </li>
+        </div>
 
         <% if logged_in? %>
           <div class='comment-buttons'>

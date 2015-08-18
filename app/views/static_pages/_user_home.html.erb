@@ -1,8 +1,6 @@
-<div class='center jumbotron'>
-
-  <h1><%= yield(:page) %></h1>
+<div class='center well'>
   <p>
-   Welcome back <% current_user.name %>
+   Welcome back <%= current_user.name %>
   </p>
 
   <%= link_to 'New Article',
@@ -11,8 +9,15 @@
 
 </div>
 
-<div>
 
-  <%= render Article.find_by_id(1) %>
 
-</div>
+    <div class='user-articles col-md-8'>
+      <%= render current_user.articles %>
+    </div>
+    <div class='user-comments col-md-4'>
+      <%= render :partial => 'comments/profile_comment',
+                 :collection => current_user.comments.reverse,
+                 :as => :comment %>
+    </div>
+
+
