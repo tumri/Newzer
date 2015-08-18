@@ -1,11 +1,11 @@
-<div class='row anchor' id="comment_<%= comment.id %>">
+<div class='row anchor' id="comment_<%= @comment.id %>">
   <div class='col-md-6'>
-    <% if comment.flagged? && logged_in? && power_user? %>
+    <% if @comment.flagged? && logged_in? && power_user? %>
       <div class='panel panel-warning clear wrap overflow'>
-    <% elsif comment.unflagged? && logged_in? && power_user? %>
+    <% elsif @comment.unflagged? && logged_in? && power_user? %>
       <div class='panel panel-info clear wrap overflow'>
     <% else %>
-      <div class='panel panel-default clear wrap overflow'>
+      <div class='panel panel-success clear wrap overflow'>
     <% end %>
 
       <div class='panel-heading'>
@@ -13,27 +13,27 @@
         <p class='panel-title'>
           <strong>
 
-            <% if comment.user.admin? %>
-              <%= link_to "#{comment.user.try(:name)}",
-                          comment.user,
+            <% if @comment.user.admin? %>
+              <%= link_to "#{@comment.user.try(:name)}",
+                          @comment.user,
                           class: "admin-user" %>
-            <% elsif comment.user.mod? %>
+            <% elsif @comment.user.mod? %>
               <%= link_to "#{comment.user.try(:name)}",
                           comment.user,
                           class: "mod-user" %>
             <% else %>
-              <%= link_to "#{comment.user.try(:name)}",
-                          comment.user %>
+              <%= link_to "#{@comment.user.try(:name)}",
+                          @comment.user %>
             <% end %>
 
-            <% if comment.root? && comment.leaf? %>
+            <% if @comment.root? && @comment.leaf? %>
               <%= link_to 'Context',
-                          comment.article,
+                          @comment.article,
                           title: 'Context',
                           class: "comment-context" %>
             <% else %>
-              <%= link_to "Context (#{comment.depth})",
-                          comment.root,
+              <%= link_to "Context (#{@comment.depth})",
+                          @comment.root,
                           title: 'Context',
                           class: "comment-context" %>
             <% end %>
@@ -44,26 +44,26 @@
 
       <div class='panel-body'>
 
-        <p class='comment-body'><%= comment.body %></p>
+        <p class='comment-body'><%= @comment.body %></p>
         <div class='comment-status'>
-          <li title=<%= comment.updated_at.localtime.asctime.split.join('-') %>>
-            <%= distance_of_time_in_words_to_now(comment.updated_at) %> ago
+          <li title=<%= @comment.updated_at.localtime.asctime.split.join('-') %>>
+            <%= distance_of_time_in_words_to_now(@comment.updated_at) %> ago (<%= comment.descendants.count %> replies)
           </li>
         </div>
 
         <% if logged_in? %>
           <div class='comment-buttons'>
             <%= link_to '',
-                        new_comment_path(comment.id),
+                        new_comment_path(@comment.id),
                         remote: true,
                         title: 'Reply',
                         id: "reply_button",
                         class: "btn btn-xs btn-default
                                 glyphicon glyphicon-share-alt
                                 comment-reply" %>
-            <% unless power_user? || current_user?(comment.user) || comment.unflagged? %>
+            <% unless power_user? || current_user?(@comment.user) || @comment.unflagged? %>
               <%= link_to '',
-                          flag_comment_path(comment.id),
+                          flag_comment_path(@comment.id),
                           method: :post,
                           title: 'Flag',
                           data: { confirm: 'Are you sure you want to flag this comment for inappropriate content?' },
@@ -71,9 +71,9 @@
                                   glyphicon glyphicon-warning-sign
                                   comment-flag" %>
             <% end %>
-            <% if power_user? && comment.flagged? %>
+            <% if power_user? && @comment.flagged? %>
                 <%= link_to '',
-                          unflag_comment_path(comment.id),
+                          unflag_comment_path(@comment.id),
                           method: :post,
                           title: 'Unflag',
                           data: { confirm: 'Are you sure you want to unflag this comment?' },
@@ -81,9 +81,9 @@
                                   glyphicon glyphicon-check
                                   comment-flag" %>
             <% end %>
-            <% if power_user? || current_user?(comment.user) %>
+            <% if power_user? || current_user?(@comment.user) %>
               <%= link_to '',
-                          comment,
+                          @comment,
                           method: :delete,
                           title: 'Delete',
                           data: { confirm: 'Are you sure you want to delete this comment?' },
@@ -97,14 +97,14 @@
 
       </div>
 
-      <div id="reply_form_<%= comment.id %>">
+      <div id="reply_form_<%= @comment.id %>">
       </div>
 
     </div>
-    <div id="ajax_flash_<%= comment.id %>">
+    <div id="ajax_flash_<%= @comment.id %>">
     </div>
   </div>
 </div>
 
-<div class='replies' id="ajax_reply_<%= comment.id %>">
+<div class='replies' id="ajax_reply_<%= @comment.id %>">
 </div>

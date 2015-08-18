@@ -11,7 +11,7 @@ class Comment < ActiveRecord::Base
 
   validates :body,
             presence: true,
-            length: { minimum: 10, maximum: 500 }
+            length: { minimum: 10, maximum: 1000 }
 
   validates :article_id,
             presence: true

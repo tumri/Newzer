@@ -12,7 +12,7 @@
           <div class='user-name'><%= @user.name %></div>
         <% end %>
       </h1>
-      <p class='user-time'>
+      <p class='user-status'>
         <span title=<%= @user.created_at.localtime.asctime.split.join('-') %>>
           Joined <%= distance_of_time_in_words_to_now(@user.created_at) %> ago.
         </span>
@@ -54,7 +54,7 @@
       <%= render @user.articles %>
     </div>
     <div class='user-comments col-md-4'>
-      <%= render :partial => 'comments/profile_comment',
+      <%= render :partial => 'comments/comment_profile',
                  :collection => @user.comments.reverse,
                  :as => :comment %>
     </div>

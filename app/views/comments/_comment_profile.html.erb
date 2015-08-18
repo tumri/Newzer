@@ -26,7 +26,7 @@
                         comment.user %>
           <% end %>
 
-          <% if comment.parent_id == nil %>
+          <% if comment.root? && comment.leaf? %>
             <%= link_to 'Context',
                         comment.article,
                         title: 'Context',

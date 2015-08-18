@@ -1,4 +1,4 @@
-$("#ajax_reply_<%= @comment.parent.id %>").html("<%= escape_javascript(render 'comments/instant_comment') %>");
+$("#ajax_reply_<%= @comment.parent.id %>").html("<%= escape_javascript(render 'comments/comment_instant') %>");
 
 $("#reply_form_<%= @comment.parent.id %>").html("");
 

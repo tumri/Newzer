@@ -45,7 +45,7 @@ class CommentsController < ApplicationController
         end
 
       else
-        flash[:warning] = 'Replies must be between 10 and 500 characters.'
+        flash[:warning] = 'Replies must be between 10 and 1000 characters.'
         redirect_to request.referrer
       end
 
@@ -58,7 +58,7 @@ class CommentsController < ApplicationController
         flash[:success] = 'Comment added.'
         redirect_to article_path(@comment.article)
       else
-        flash[:warning] = 'Comments must be between 10 and 500 characters.'
+        flash[:warning] = 'Comments must be between 10 and 1000 characters.'
         redirect_to request.referrer
       end
     end
@@ -70,10 +70,6 @@ class CommentsController < ApplicationController
       flash[:danger] = 'Comment deleted.'
       redirect_to request.referrer
     end
-  end
-
-  def remove
-    # TODO: Method for pseudo-deletion of comments using 'removed' boolean.
   end
 
   def flag
@@ -104,7 +100,7 @@ class CommentsController < ApplicationController
       flash[:success] = 'Comment unflagged.'
       redirect_to request.referrer || articles_path(@comment.article)
     else
-      flash[:danger] = 'Article unapproved.'
+      flash[:danger] = '[Error] Comment was not unflagged. Please try again'
       redirect_to request.referrer || articles_path(@comment.article)
     end
   end

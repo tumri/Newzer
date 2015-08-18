@@ -11,7 +11,6 @@
 <p><strong><em>TODO:</em></strong></p>
 
 <ul>
-<li><p>Optimize everything for Turbolinks and clean up any resulting issues.</p></li>
 <li><p>Implement better [:flash] messages by attaching them below the static navbar instead of having them appear at the top of the page.</p></li>
 <li><p>Improve the contact, help, and about pages. Replace placeholder image with relevant images in the categories page.</p></li>
 <li><p>Testing is currently underwhelming. Tests must be created for article and comment create/edit/delete. Tests must also be created for file uploads/deletions with S3. User tests must be expanded to include moderators.</p></li>
@@ -34,6 +33,7 @@
 <li><p>Users are able to leave comments on articles. Comments may also be replied to in a nested hierarchical fashion(implemented using closure_tree). If a root comment is deleted then the replies to that root comment become root comments themselves. A context button is provided so that each comment's parent comment or parent article may be easily found.</p></li>
 <li><p>Comment replies employ AJAX to allow users to reply to comments without a redirect.</p></li>
 <li><p>Articles are be able to be reported for inappropriate content before they are approved. Admins/Mods are then see these reported articles in a sepearate reported article feed. Comments are also be able to be reported for inappropriate content and put into a separate reported comment feed for Admins/Mods.</p></li>
+<li><p>Optimized for Turbolinks compatibility.</p></li>
 </ul>
 
 
@@ -42,7 +42,7 @@
 <p><strong><em>Future Plans(2.0):</em></strong></p>
 
 <ul>
-<li><p> The frontend should be reimplemented using Ember to cut down on page loads and provide a better UX.</p></li>
+<li><p> The frontend should be reimplemented using Ember to cut down on page loads and provide a better UX. Alternatively, waiting for Turbolinks 3 and ActionCable may end up being a better option over redoing everything.</p></li>
 <li><p> A voting system should be implemented so that "Featured" articles are automatically flagged as such after reaching a certain popularity threshold.</p></li>
 <li><p> An automated temporary moderation system should be implemented so that heavily reported/flagged articles/comments are automatically toggled "hidden" until an Admin/Mod is able to manually inspect the offending material.</p></li>
 <li><p> A bookmarking and favoriting system should be implemented with notification options for users to be alerted when their favorited writers post a new article or when an older article is updated.</p></li>

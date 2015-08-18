@@ -4,6 +4,8 @@
 
 <%= will_paginate @comments %>
 
-<%= render @comments %>
+<%= render :partial => 'comments/comment_flagged',
+           :collection => @comments,
+           :as => :comment %>
 
 <%= will_paginate @comments %>

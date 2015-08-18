@@ -1,5 +1,5 @@
 <div class='row anchor' id="comment_<%= comment.id %>">
-  <div class='col-md-6'>
+  <div class='col-md-12'>
     <% if comment.flagged? && logged_in? && power_user? %>
       <div class='panel panel-warning clear wrap overflow'>
     <% elsif comment.unflagged? && logged_in? && power_user? %>
@@ -32,7 +32,7 @@
                           title: 'Context',
                           class: "comment-context" %>
             <% else %>
-              <%= link_to "Context (#{comment.depth})",
+              <%= link_to 'Context',
                           comment.root,
                           title: 'Context',
                           class: "comment-context" %>
@@ -53,24 +53,6 @@
 
         <% if logged_in? %>
           <div class='comment-buttons'>
-            <%= link_to '',
-                        new_comment_path(comment.id),
-                        remote: true,
-                        title: 'Reply',
-                        id: "reply_button",
-                        class: "btn btn-xs btn-default
-                                glyphicon glyphicon-share-alt
-                                comment-reply" %>
-            <% unless power_user? || current_user?(comment.user) || comment.unflagged? %>
-              <%= link_to '',
-                          flag_comment_path(comment.id),
-                          method: :post,
-                          title: 'Flag',
-                          data: { confirm: 'Are you sure you want to flag this comment for inappropriate content?' },
-                          class: "btn btn-xs btn-warning
-                                  glyphicon glyphicon-warning-sign
-                                  comment-flag" %>
-            <% end %>
             <% if power_user? && comment.flagged? %>
                 <%= link_to '',
                           unflag_comment_path(comment.id),
@@ -92,19 +74,10 @@
                                   comment-delete" %>
             <% end %>
           </div>
-
         <% end %>
 
       </div>
 
-      <div id="reply_form_<%= comment.id %>">
-      </div>
-
-    </div>
-    <div id="ajax_flash_<%= comment.id %>">
     </div>
   </div>
-</div>
-
-<div class='replies' id="ajax_reply_<%= comment.id %>">
 </div>

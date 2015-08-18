@@ -98,7 +98,7 @@
 
       <div class='article-buttons'>
 
-        <% unless article.approved? || current_user?(article.user) %>
+        <% unless power_user? || article.approved? || current_user?(article.user) %>
           <%= link_to '',
                       report_article_path(article),
                       method: :post,
@@ -108,44 +108,40 @@
                               glyphicon glyphicon-warning-sign' %>
         <% end %>
 
-        <% if power_user? %>
-          <% if article.approved? %>
-            <%= link_to '',
-                        approve_article_path(article),
-                        method: :post,
-                        title: 'Unapprove',
-                        data: { confirm: 'Are you sure you want to unapprove this article?'},
-                        class: 'btn btn-sm btn-primary
-                                glyphicon glyphicon-eye-open' %>
-          <% else %>
-            <%= link_to '',
-                        approve_article_path(article),
-                        method: :post,
-                        title: 'Approve',
-                        data: { confirm: 'Are you sure you want to approve this article?'},
-                        class: 'btn btn-sm btn-default
-                                glyphicon glyphicon-eye-close' %>
-          <% end %>
+        <% if power_user? && article.approved? %>
+          <%= link_to '',
+                      approve_article_path(article),
+                      method: :post,
+                      title: 'Unapprove',
+                      data: { confirm: 'Are you sure you want to unapprove this article?'},
+                      class: 'btn btn-sm btn-primary
+                              glyphicon glyphicon-eye-open' %>
+        <% elsif power_user? %>
+          <%= link_to '',
+                      approve_article_path(article),
+                      method: :post,
+                      title: 'Approve',
+                      data: { confirm: 'Are you sure you want to approve this article?'},
+                      class: 'btn btn-sm btn-default
+                              glyphicon glyphicon-eye-close' %>
         <% end %>
 
-        <% if power_user? %>
-          <% if article.featured? %>
-            <%= link_to '',
-                        feature_article_path(article),
-                        method: :post,
-                        title: 'Unfeature',
-                        data: { confirm: 'Are you sure you want to unfeature this article?'},
-                        class: 'btn btn-sm btn-primary
-                                glyphicon glyphicon-star' %>
-          <% else %>
-            <%= link_to '',
-                        feature_article_path(article),
-                        method: :post,
-                        title: 'Feature',
-                        data: { confirm: 'Are you sure you want to feature this article?'},
-                        class: 'btn btn-sm btn-default
-                                glyphicon glyphicon-star-empty' %>
-          <% end %>
+        <% if power_user? && article.featured? %>
+          <%= link_to '',
+                      feature_article_path(article),
+                      method: :post,
+                      title: 'Unfeature',
+                      data: { confirm: 'Are you sure you want to unfeature this article?'},
+                      class: 'btn btn-sm btn-primary
+                              glyphicon glyphicon-star' %>
+        <% elsif power_user? %>
+          <%= link_to '',
+                      feature_article_path(article),
+                      method: :post,
+                      title: 'Feature',
+                      data: { confirm: 'Are you sure you want to feature this article?'},
+                      class: 'btn btn-sm btn-default
+                              glyphicon glyphicon-star-empty' %>
         <% end %>
 
         <% if power_user? || current_user?(article.user) %>

@@ -7,8 +7,6 @@
 
 ***TODO:***
 
-* Optimize everything for Turbolinks and clean up any resulting issues.
-
 * Implement better [:flash] messages by attaching them below the static navbar instead of having them appear at the top of the page.
 
 * Improve the contact, help, and about pages. Replace placeholder images with relevant images in the categories page.
@@ -44,11 +42,13 @@
 
 * Articles are be able to be reported for inappropriate content before they are approved. Admins/Mods are then see these reported articles in a sepearate reported article feed. Comments are also be able to be reported for inappropriate content and put into a separate reported comment feed for Admins/Mods.
 
+* Optimized for Turbolinks compatibility.
+
 -----
 
 ***Future Plans(2.0):***
 
-* The frontend should be reimplemented using Ember to cut down on page loads and provide a better UX.
+* The frontend should be reimplemented using Ember to cut down on page loads and provide a better UX. Alternatively, waiting for Turbolinks 3 and ActionCable may end up being a better option over redoing everything.
 
 * A voting system should be implemented so that "Featured" articles are automatically flagged as such after reaching a certain popularity threshold.
 

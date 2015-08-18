@@ -89,7 +89,7 @@
 
       <div class='article-buttons'>
 
-        <% unless @article.approved? || current_user?(@article.user) %>
+        <% unless power_user? || @article.approved? || current_user?(@article.user) %>
           <%= link_to '',
                       report_article_path(@article),
                       method: :post,
@@ -99,40 +99,40 @@
                               glyphicon glyphicon-warning-sign' %>
         <% end %>
 
-        <% if power_user? %>
-          <% if @article.approved? %>
-            <%= link_to '',
-                        approve_article_path(@article),
-                        method: :post,
-                        data: { confirm: 'Are you sure you want to unapprove this article?'},
-                        class: 'btn btn-sm btn-primary
-                                glyphicon glyphicon-eye-open' %>
-            <% else %>
-            <%= link_to '',
-                        approve_article_path(@article),
-                        method: :post,
-                        data: { confirm: 'Are you sure you want to approve this article?'},
-                        class: 'btn btn-sm btn-default
-                                glyphicon glyphicon-eye-close' %>
-          <% end %>
+        <% if power_user? && @article.approved? %>
+          <%= link_to '',
+                      approve_article_path(@article),
+                      method: :post,
+                      data: { confirm: 'Are you sure you want to unapprove this article?'},
+                      title: 'Unapprove',
+                      class: 'btn btn-sm btn-primary
+                              glyphicon glyphicon-eye-open' %>
+        <% elsif power_user? %>
+          <%= link_to '',
+                      approve_article_path(@article),
+                      method: :post,
+                      data: { confirm: 'Are you sure you want to approve this article?'},
+                      title: 'Approve',
+                      class: 'btn btn-sm btn-default
+                              glyphicon glyphicon-eye-close' %>
         <% end %>
 
-        <% if power_user? %>
-          <% if @article.featured? %>
-            <%= link_to '',
-                        feature_article_path(@article),
-                        method: :post,
-                        data: { confirm: 'Are you sure you want to unfeature this article?'},
-                        class: 'btn btn-sm btn-primary
-                                glyphicon glyphicon-star' %>
-            <% else %>
-            <%= link_to '',
-                        feature_article_path(@article),
-                        method: :post,
-                        data: { confirm: 'Are you sure you want to feature this article?'},
-                        class: 'btn btn-sm btn-default
-                                glyphicon glyphicon-star-empty' %>
-            <% end %>
+        <% if power_user? && @article.featured? %>
+          <%= link_to '',
+                      feature_article_path(@article),
+                      method: :post,
+                      data: { confirm: 'Are you sure you want to unfeature this article?'},
+                      title: 'Unfeature',
+                      class: 'btn btn-sm btn-primary
+                              glyphicon glyphicon-star' %>
+        <% elsif power_user? %>
+          <%= link_to '',
+                      feature_article_path(@article),
+                      method: :post,
+                      data: { confirm: 'Are you sure you want to feature this article?'},
+                      title: 'Feature',
+                      class: 'btn btn-sm btn-default
+                              glyphicon glyphicon-star-empty' %>
         <% end %>
 
         <% if power_user? || current_user?(@article.user) %>
@@ -168,6 +168,8 @@
   <div id='comment-form-fix' data-no-turbolink>
   </div>
 
+  <hr>
+
   <div class='comment-container'>
     <%= comments_tree_for @article.comments.hash_tree %>
   </div>
@@ -175,7 +177,7 @@
   <% if logged_in? %>
 
   <div id='comment-form' class='row' data-no-turbolink>
-    <%= render 'comments/article_comment_form' %>
+    <%= render 'comments/form_article' %>
   </div>
 
   <% end %>

@@ -5,6 +5,7 @@
 
   <%= link_to 'New Article',
               new_article_path,
+              "data-no-turbolink" => "true",
               class: 'btn btn-md btn-primary' %>
 
 </div>
@@ -16,7 +17,7 @@
     <%= render current_user.articles %>
   </div>
   <div class='user-comments col-md-4'>
-    <%= render :partial => 'comments/profile_comment',
+    <%= render :partial => 'comments/comment_profile',
                :collection => current_user.comments.reverse,
                :as => :comment %>
   </div>
