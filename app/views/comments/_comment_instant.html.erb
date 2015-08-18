@@ -47,7 +47,7 @@
         <p class='comment-body'><%= @comment.body %></p>
         <div class='comment-status'>
           <li title=<%= @comment.updated_at.localtime.asctime.split.join('-') %>>
-            <%= distance_of_time_in_words_to_now(@comment.updated_at) %> ago (<%= comment.descendants.count %> replies)
+            <%= distance_of_time_in_words_to_now(@comment.updated_at) %> ago
           </li>
         </div>
 
