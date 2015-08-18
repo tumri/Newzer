@@ -5,13 +5,15 @@
   <%= will_paginate %>
 </div>
 
-<ul class='users col-md-12'>
-  <% @users.each do |user| %>
-    <div class='col-md-4'>
-      <%= render user %>
-    </div>
-  <% end %>
-</ul>
+<div class='row'>
+  <ul class='users col-md-12'>
+    <% @users.each do |user| %>
+      <div class='col-md-4'>
+        <%= render user %>
+      </div>
+    <% end %>
+  </ul>
+</div>
 
 <div class='col-md-12'>
   <%= will_paginate %>

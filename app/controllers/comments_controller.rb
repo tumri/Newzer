@@ -78,10 +78,10 @@ class CommentsController < ApplicationController
 
   def flag
     @comment = Comment.find(params[:id])
-    if @comment.checked?
+    if @comment.unflagged?
       flash[:danger] = 'This comment was already flagged and approved.'
       redirect_to request.referrer || articles_path(@comment.article)
-    elsif @article.flagged?
+    elsif @comment.flagged?
       flash[:warning] = 'Comment flagged for inappropriate content.'
       redirect_to request.referrer || articles_path(@comment.article)
     else
@@ -100,7 +100,7 @@ class CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
     @comment.update_column(:flagged, false)
     @comment.update_column(:unflagged, true)
-    if @article.unflagged? && !@comment.flagged?
+    if @comment.unflagged? && !@comment.flagged?
       flash[:success] = 'Comment unflagged.'
       redirect_to request.referrer || articles_path(@comment.article)
     else

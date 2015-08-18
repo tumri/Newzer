@@ -9,15 +9,15 @@
 
 </div>
 
+<hr>
 
-
-    <div class='user-articles col-md-8'>
-      <%= render current_user.articles %>
-    </div>
-    <div class='user-comments col-md-4'>
-      <%= render :partial => 'comments/profile_comment',
-                 :collection => current_user.comments.reverse,
-                 :as => :comment %>
-    </div>
-
-
+<div class='row'>
+  <div class='user-articles col-md-8'>
+    <%= render current_user.articles %>
+  </div>
+  <div class='user-comments col-md-4'>
+    <%= render :partial => 'comments/profile_comment',
+               :collection => current_user.comments.reverse,
+               :as => :comment %>
+  </div>
+</div>
