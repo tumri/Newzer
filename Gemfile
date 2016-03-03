@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
-ruby '2.1.6'
+ruby '2.2.4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails',                   '~>4.2.1'
+gem 'rails',                   '~>4.2.5'
 # WYSIWYG Editor
 gem 'ckeditor',                '~>4.1.2'
 # Provides authorization functionality.
@@ -11,7 +11,7 @@ gem 'pundit',                  '~>1.0.1'
 # Provides file upload capability.
 gem 'carrierwave',             '~>0.10.0'
 # Provides cloud storage functionality.
-gem 'fog',                     '~>1.32.0'
+gem 'fog',                     '~>1.36.0'
 # ImageMagick integration.
 gem 'mini_magick',             '~>4.2.10'
 # Password Protection
