@@ -32,7 +32,7 @@ User.create!(name:                              'Siddhu',
              activated_at:                 Time.zone.now)
 
 User.create!(name:                              'Nicole',
-             email:           'nickcummings11@gmail.com',
+             email:           'nicolechance94@gmail.com',
              password:                          'nicole',
              password_confirmation:             'nicole',
              admin:                                false,
