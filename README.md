@@ -1,24 +1,13 @@
 **Newzer**
 -----
 
-***A personal project to create a user generated news article application using Ruby on Rails.***
+***A personal project to create a user generated news article application using Ruby on Rails. The concept is similar to Medium but is not a clone because this project was made before I knew Medium existed.***
 
 ------
 
-***TODO:***
+***Features:***
 
-* Implement better [:flash] messages by attaching them below the static navbar instead of having them appear at the top of the page.
-
-* Improve the contact, help, and about pages. Replace placeholder images with relevant images in the categories page.
-
-* Testing is currently underwhelming. Tests must be created for article and comment create/edit/delete. Tests must also be created for file uploads/deletions with S3. User tests must be expanded to include moderators.
-
------
-
-***Done:***
-
-
-* The login/logout/validation system is a basic implementation but could be replaced by Devise or similar. Users are divided into admins, mods, and basic users. Admins have all power user privileges, mods have all power user privileges but cannot delete other users, and basic users only have basic privileges.
+* The login/logout/validation system is a basic custom implementation and is secure and effective. Users are divided into admins, mods, and basic users. Admins have all power user privileges, mods have all power user privileges but cannot delete other users, and basic users only have basic privileges.
 
 * Each user has a profile where their previous articles and comments are be displayed.
 
@@ -28,7 +17,7 @@
 
 * User avatars are handled through Gravatar but may be replaced with a private avatar system in the future.
 
-* Each user has the ability to post fully formatted articles using CKEditor. Images/attachments may be direct linked from an outside host such as Imgur or uploaded directly to internal file storage from the CKEditor article form page.
+* Each user has the ability to post fully formatted articles using CKEditor. Images/attachments may be direct linked from an outside host such as Imgur or uploaded directly to internal file storage from the CKEditor article form page. The image browser and uploader is accessed using the picture/image embed button in CKEditor.
 
 * Images/attachments are stored in Amazon S3. File storage is handled by CarrierWave and Fog. Each user's uploads are private and are not available to outside users. If a user is deleted then their attachments/images are deleted from S3 as well.
 
@@ -46,9 +35,9 @@
 
 -----
 
-***Future Plans(2.0):***
+***Future Plans:***
 
-* The frontend should be reimplemented using Ember to cut down on page loads and provide a better UX. Alternatively, waiting for Turbolinks 3 and ActionCable may end up being a better option over redoing everything.
+* The frontend should be reimplemented using React.js and the backend should be reworked run as a simple API.
 
 * A voting system should be implemented so that "Featured" articles are automatically flagged as such after reaching a certain popularity threshold.
 
